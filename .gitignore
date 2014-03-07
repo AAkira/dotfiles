@@ -1,0 +1,14 @@
+.DS_Store
+/*
+/.*
+
+# 無視したくないファイルを![filename]で指定
+!/.bash_aliases
+!/.bash_profile
+!/.bashrc
+!/.vimrc
+!/.vim
+!/.gitignore
+!/.gitconfig
+!/.gitmodules
+
