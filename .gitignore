@@ -1,6 +1,9 @@
-.DS_Store
+# 全ファイルを一度無視
 /*
+# dotfileを無視
 /.*
+# mac
+.DS_Store
 
 # 無視したくないファイルを![filename]で指定
 !/.bash_aliases
@@ -9,6 +12,6 @@
 !/.vimrc
 !/.vim
 !/.gitignore
-!/.gitconfig
+#!/.gitconfig
 !/.gitmodules
 
