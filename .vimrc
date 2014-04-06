@@ -78,7 +78,6 @@ inoremap <C-f> <Right>
 "	Normal ModeのままEnterで改行挿入
 noremap <CR> o<ESC>
 
-
 "================================
 "			One line move
 "	eclipseの一行移動
@@ -98,33 +97,6 @@ endfunction
 
 vnoremap <Down> :call <SID>move_block('d')<Cr>==gv
 vnoremap <Up> :call <SID>move_block('u')<Cr>==gv
-
-
-
-
-"================================
-"         for auto run(js?)
-"
-"================================
-"if has('vim_starting')
-"  set runtimepath+=~/.vim/bundle/neobundle.vim/
-"endif
-"
-"call neobundle#rc(expand('~/.vim/bundle/'))
-"
-"" Let NeoBundle manage NeoBundle
-"NeoBundleFetch 'Shougo/neobundle.vim'
-"
-"" add plugins
-"filetype plugin on
-"
-"NeoBundleCheck
-"
-"NeoBundle 'thinca/vim-quickrun'
-"NeoBundle 'Markdown'
-"
-"let $JS_CMD='node'
-
 
 "================================
 " ruby php 自動実行
@@ -147,3 +119,85 @@ function! s:Exec()
 :endfunction         
 command! Exec call <SID>Exec() 
 map <silent> <C-P> :call <SID>Exec()<CR>
+
+
+"*********************Plug in***************************
+"================================
+"        NeoBundle 
+"================================
+"----------environment-----------
+if has('win32') || has('win64')
+	set shellslash
+	let $VIMDIR = expand('~/vimfiles')
+else
+	let $VIMDIR = expand('~/.vim')
+endif
+"-----------Settings------------
+if has('vim_starting')
+  set runtimepath+=~/.vim/bundle/neobundle.vim/
+endif
+
+call neobundle#rc(expand('~/.vim/bundle/'))
+
+" Let NeoBundle manage NeoBundle
+NeoBundleFetch 'Shougo/neobundle.vim'
+
+"----------add plugins----------
+filetype plugin on
+NeoBundleCheck
+
+NeoBundle 'thinca/vim-quickrun'
+NeoBundle 'Markdown'
+" ファイル操作
+NeoBundle 'Shougo/unite.vim'
+" 補完
+NeoBundle 'Shougo/neocomplcache'
+" snippet
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
+" smart inputのruby対応版
+NeoBundle "kana/vim-smartinput"
+NeoBundle "cohama/vim-smartinput-endwise"
+call smartinput_endwise#define_default_rules()
+" ruby 自動def end補完 -- endwise
+NeoBundle "tpope/vim-endwise"
+
+"================================
+"		    plug-in settings
+" 			neocomplcache
+" 			vim 補完
+"================================
+"" neocomplcache
+NeoBundle 'Shougo/neocomplcache'
+" Disable AutoComplPop.
+let g:acp_enableAtStartup = 0
+" Use neocomplcache.
+let g:neocomplcache_enable_at_startup = 1
+" Use smartcase.
+let g:neocomplcache_enable_smart_case = 1
+" Set minimum syntax keyword length.
+let g:neocomplcache_min_syntax_length = 3
+let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+
+" Define dictionary.
+let g:neocomplcache_dictionary_filetype_lists = {
+    \ 'default' : ''
+		\ }
+
+" Plugin key-mappings.
+inoremap <expr><C-g>     neocomplcache#undo_completion()
+inoremap <expr><C-l>     neocomplcache#complete_common_string()
+
+" Recommended key-mappings.
+" <CR>: close popup and save indent.
+inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
+function! s:my_cr_function()
+	return neocomplcache#smart_close_popup() . "\<CR>"
+endfunction
+" <TAB>: completion.
+inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
+" <C-h>, <BS>: close popup and delete backword char.
+inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
+inoremap <expr><C-y>  neocomplcache#close_popup()
+inoremap <expr><C-e>  neocomplcache#cancel_popup()

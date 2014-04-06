@@ -1,3 +1,8 @@
 Markdown
 neobundle.vim
+neocomplcache
+unite.vim
+vim-endwise
 vim-quickrun
+vim-smartinput
+vim-smartinput-endwise
