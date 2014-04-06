@@ -1,0 +1,5 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhist_cnt =3
+let g:netrw_dirhist_1='/Users/akira/rails_porjects/Sample_App/spec/requests'
+let g:netrw_dirhist_2='/Users/akira/.ssh'
+let g:netrw_dirhist_3='/Users/akira/Documents/works/.git/logs/refs'
