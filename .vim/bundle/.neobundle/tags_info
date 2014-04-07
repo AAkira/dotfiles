@@ -1,6 +1,8 @@
 Markdown
 neobundle.vim
 neocomplcache
+neosnippet
+neosnippet-snippets
 unite.vim
 vim-endwise
 vim-quickrun

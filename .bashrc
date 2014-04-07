@@ -113,3 +113,9 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+
+# ---------rmtrash plugin---------------------
+# rmでゴミ箱に移動させる
+# sudo を付けるとゴミ箱にいかずに消えるので注意
+# --------------------------------------------
+alias rm='rmtrash'
