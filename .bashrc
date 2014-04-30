@@ -119,3 +119,10 @@ fi
 # sudo を付けるとゴミ箱にいかずに消えるので注意
 # --------------------------------------------
 alias rm='rmtrash'
+
+# -------------git plugin---------------------
+# git補完
+# plugin download 
+# => https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+# --------------------------------------------
+source ~/.git-completion.bash
