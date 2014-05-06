@@ -63,6 +63,13 @@ set smartcase "検索文字列に大文字が含まれている場合は区別�
 set wrapscan "検索時に最後まで行ったら最初に戻る
 set noincsearch "検索文字列入力時に順次対象文字列にヒットさせない
 set nohlsearch "検索結果文字列の非ハイライト表示
+set suffixesadd+=.rb "gfコマンド ファイル検索の拡張子
+
+"#######################
+" その他
+"#######################
+set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可
+set whichwrap=b,s,<,>,[,]	"左右のカーソル移動で行間移動可能
 
 "================================
 "			key map
