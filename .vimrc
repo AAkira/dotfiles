@@ -22,6 +22,17 @@ if &encoding !=# 'utf-8'
 endif
 
 "#######################
+" file format
+"#######################
+"================================
+" .mdがmarkdownではなくmodula2として認識されるので…
+"================================
+augroup PrevimSettings
+	autocmd!
+	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+augroup END
+
+"#######################
 " 表示系
 "#######################
 set number "行番号表示
@@ -86,29 +97,9 @@ inoremap <C-f> <Right>
 noremap <CR> o<ESC>
 
 "================================
-"			One line move
-"	eclipseの一行移動
-"	Alt(Option) + <up><down>
-"================================
-function! s:move_block(d) range
-	let cnt = a:lastline - a:firstline
-	if a:d ==# 'u'
-		let sign = '-'
-		let cnt = 2
-	else
-		let sign = '+'
-		let cnt += 1
-	endif
-	execute printf('%d,%dmove%s%d', a:firstline, a:lastline, sign, cnt)
-endfunction
-
-vnoremap <Down> :call <SID>move_block('d')<Cr>==gv
-vnoremap <Up> :call <SID>move_block('u')<Cr>==gv
-
-"================================
 " ruby php 自動実行
 " Normal mode -> push 'space key'
-" ===============================
+"===============================
 function! ExecuteCurrentFile()
 	if &filetype == 'php' || &filetype == 'ruby'
 		execute '!' . &filetype . ' %'
@@ -119,18 +110,86 @@ nnoremap <Space> :call ExecuteCurrentFile()<CR>
 "================================
 " python 自動実行
 " push ' CTRL + p '
-" ===============================
-
+"===============================
 function! s:Exec()
     exe "!" . &ft . " %"        
 :endfunction         
 command! Exec call <SID>Exec() 
 map <silent> <C-P> :call <SID>Exec()<CR>
 
+"================================
+" 挿入モード時に色を変える
+"===============================
+if !exists('g:hi_insert')
+	let g:hi_insert = 'highlight StatusLine guifg=White guibg=DarkCyan gui=none ctermfg=White ctermbg=DarkCyan cterm=none'
+endif
+
+if has('unix') && !has('gui_running')
+	inoremap <silent> <ESC> <ESC>
+	inoremap <silent> <C-[> <ESC>
+endif
+
+if has('syntax')
+	augroup InsertHook
+	autocmd!
+	autocmd InsertEnter * call s:StatusLine('Enter')
+	autocmd InsertLeave * call s:StatusLine('Leave')
+	augroup END
+endif
+
+let s:slhlcmd = ''
+
+function! s:StatusLine(mode)
+	if a:mode == 'Enter'
+		silent! let s:slhlcmd = 'highlight ' . s:GetHighlight('StatusLine')
+		silent exec g:hi_insert
+	else
+		highlight clear StatusLine
+		silent exec s:slhlcmd
+	endif
+endfunction
+
+function! s:GetHighlight(hi)
+	redir => hl
+	exec 'highlight '.a:hi
+	redir END
+	let hl = substitute(hl, '[\r\n]', '', 'g')
+	let hl = substitute(hl, 'xxx', '', '')
+	return hl
+endfunction
+
+"================================
+" カレントウィンドウのみ罫線を引く
+"===============================
+augroup cch
+	autocmd! cch
+	autocmd WinLeave * set nocursorline
+	autocmd WinLeave * set nocursorcolumn
+	autocmd WinEnter,BufRead * set cursorline
+	autocmd WinEnter,BufRead * set cursorcolumn
+augroup END
+
+"================================
+" 全角スペースをハイライト
+"===============================
+function! ZenkakuSpace()
+  highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+endfunction
+
+if has('syntax')
+	augroup ZenkakuSpace
+	autocmd!
+	autocmd ColorScheme       * call ZenkakuSpace()
+	autocmd VimEnter,WinEnter * match ZenkakuSpace /　/
+	augroup END
+	call ZenkakuSpace()
+endif
 
 "*********************Plug in***************************
 "================================
-"        NeoBundle 
+"       NeoBundle 
+"		----install command---
+"		:so $MYVIMRC | NeoBundleInstall
 "================================
 "----------environment-----------
 if has('win32') || has('win64')
@@ -155,6 +214,8 @@ NeoBundleCheck
 
 NeoBundle 'thinca/vim-quickrun'
 NeoBundle 'Markdown'
+" Markdown syntax hilight
+NeoBundle 'plasticboy/vim-markdown'
 " ファイル操作
 NeoBundle 'Shougo/unite.vim'
 " 補完
@@ -168,6 +229,49 @@ NeoBundle "cohama/vim-smartinput-endwise"
 call smartinput_endwise#define_default_rules()
 " ruby 自動def end補完 -- endwise
 NeoBundle "tpope/vim-endwise"
+
+" open browser
+NeoBundle 'tyru/open-browser.vim'
+" previm vimで書いたmarkdownをpreview
+NeoBundle 'kannokanno/previm'
+" autosave
+NeoBundle 'vim-scripts/vim-auto-save'
+" cscroll vimでchromeを操作
+NeoBundle 'syui/cscroll.vim'
+" submode 連続スクロール
+NeoBundle 'kana/vim-submode'
+
+
+"================================
+"		    plug-in settings
+" 			previm
+" 			commands 
+"================================
+" browserで開く
+" open-browser.vimを使用する場合は不要
+" let g:previm_open_cmd = 'open -a Google\ Chrome'
+
+" Markdown Preview
+" <F7>でプレビュー
+nnoremap <silent> <F7> :PrevimOpen<CR>
+" プレビューと同時にフォーカスをiTerm2に戻したければ
+" ただし、注意として､「command -bar PrevimOpen...」のように
+"「-bar」オプションを付ける必要があり
+" http://mba-hack.blogspot.jp/2013/09/mac.html
+" nnoremap <silent> <F7> :PrevimOpen \|:silent !open -a it2_f<CR>
+" [,]+j+j+j...で下にスクロール、[,]+k+k+k...で上にスクロール
+nnoremap <silent> <Leader>j :ChromeScrollDown<CR>
+nnoremap <silent> <Leader>k :ChromeScrollUp<CR>
+call submode#enter_with('cscroll', 'n', '', '<Leader>j', ':ChromeScrollDown<CR>')
+call submode#enter_with('cscroll', 'n', '', '<Leader>k', ':ChromeScrollUp<CR>')
+call submode#leave_with('cscroll', 'n', '', 'n')
+call submode#map('cscroll', 'n', '', 'j', ':ChromeScrollDown<CR>')
+call submode#map('cscroll', 'n', '', 'k', ':ChromeScrollUp<CR>')
+ 
+" 現在のタブを閉じる
+nnoremap <silent> <Leader>q :ChromeTabClose<CR>
+" [,]+f+{char}でキーを Google Chrome に送る
+nnoremap <buffer> <Leader>f :ChromeKey<Space>"
 
 "================================
 "		    plug-in settings
@@ -208,3 +312,4 @@ inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
 inoremap <expr><C-y>  neocomplcache#close_popup()
 "inoremap <expr><C-e>  neocomplcache#cancel_popup()
+

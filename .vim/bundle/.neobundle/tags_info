@@ -1,10 +1,16 @@
 Markdown
+cscroll.vim
 neobundle.vim
 neocomplcache
 neosnippet
 neosnippet-snippets
+open-browser.vim
+previm
 unite.vim
+vim-auto-save
 vim-endwise
+vim-markdown
 vim-quickrun
 vim-smartinput
 vim-smartinput-endwise
+vim-submode
