@@ -14,4 +14,5 @@
 !/.gitignore
 #!/.gitconfig
 !/.gitmodules
+!/.my_bash_info
 
