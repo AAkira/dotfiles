@@ -160,14 +160,15 @@ endfunction
 
 "================================
 " カレントウィンドウのみ罫線を引く
+" まぁまぁ見づらい
 "===============================
-augroup cch
-	autocmd! cch
-	autocmd WinLeave * set nocursorline
-	autocmd WinLeave * set nocursorcolumn
-	autocmd WinEnter,BufRead * set cursorline
-	autocmd WinEnter,BufRead * set cursorcolumn
-augroup END
+"augroup cch
+"	autocmd! cch
+"	autocmd WinLeave * set nocursorline
+"	autocmd WinLeave * set nocursorcolumn
+"	autocmd WinEnter,BufRead * set cursorline
+"	autocmd WinEnter,BufRead * set cursorcolumn
+"augroup END
 
 "================================
 " 全角スペースをハイライト
@@ -213,7 +214,7 @@ filetype plugin on
 NeoBundleCheck
 
 NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'Markdown'
+NeoBundle 'jarkdown'
 " Markdown syntax hilight
 NeoBundle 'plasticboy/vim-markdown'
 " ファイル操作
@@ -241,6 +242,12 @@ NeoBundle 'syui/cscroll.vim'
 " submode 連続スクロール
 NeoBundle 'kana/vim-submode'
 
+"================================
+"		    plug-in settings
+" 			auto-save
+"================================
+" enable AutoSave on Vim startup
+let g:auto_save = 1  
 
 "================================
 "		    plug-in settings

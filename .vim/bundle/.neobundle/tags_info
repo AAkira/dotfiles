@@ -1,5 +1,5 @@
-Markdown
 cscroll.vim
+jarkdown
 neobundle.vim
 neocomplcache
 neosnippet
@@ -9,7 +9,6 @@ previm
 unite.vim
 vim-auto-save
 vim-endwise
-vim-markdown
 vim-quickrun
 vim-smartinput
 vim-smartinput-endwise
