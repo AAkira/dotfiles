@@ -126,3 +126,6 @@ alias rm='rmtrash'
 # => https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 # --------------------------------------------
 source ~/.git-completion.bash
+
+# ---------------------git--------------------
+alias g='git'
