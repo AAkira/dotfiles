@@ -12,7 +12,7 @@
 !/.vimrc
 !/.vim
 !/.gitignore
-#!/.gitconfig
+!/.gitconfig
 !/.gitmodules
 !/.my_bash_info
 
