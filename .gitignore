@@ -15,4 +15,4 @@
 !/.gitconfig
 !/.gitmodules
 !/.my_bash_info
-
+!/.git-completion.bash # git補完
