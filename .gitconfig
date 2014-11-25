@@ -19,5 +19,7 @@
 	br = branch
 	st = status
 	di = diff
-	c = commit
+	c = commit -m
+	cc = commit
+	ca = commit --amend
 	a = add
