@@ -16,10 +16,13 @@
 	default = simple
 [alias]
 	co = checkout
+	cb = checkout -b
 	br = branch
 	st = status
 	di = diff
 	c = commit -m
 	cc = commit
 	ca = commit --amend
-	a = add
+	a = add .
+	aa = add --all
+	p = push
