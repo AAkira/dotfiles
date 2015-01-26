@@ -1,0 +1,5 @@
+imap <C-[> <Esc>
+
+nnoremap g; '[
+nnoremap g, ']
+
