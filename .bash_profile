@@ -1,4 +1,4 @@
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/eclipse/android/platform-tools:/Applications/eclipse/android/apktool
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Users/a13885/Library/Android/sdk
 ANDROIDNDK_HOME=/Applications/android-ndk-r7
 export PATH=$PATH:${ANDROIDNDK_HOME}
 export NODE_PATH=/usr/local/lib/node_modules\n
@@ -18,4 +18,4 @@ export HISTSIZE=10000
 
 # bash info position, git...
 # ここに書くと複雑で長いので外部ファイルを読み込む
-source ./my_bash_info
+source ~/.my_bash_info

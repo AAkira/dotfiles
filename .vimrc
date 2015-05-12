@@ -9,16 +9,16 @@ set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jis
 
 "-------------------mac----------------------
 if has('mac')
-	set termencoding=utf-8
-	set encoding=utf-8
-	set fileencoding=utf-8
-	set fileencodings=utf-8,cp932
+set termencoding=utf-8
+set encoding=utf-8
+set fileencoding=utf-8
+set fileencodings=utf-8,cp932
 endif
 
 "------------文字コードの自動認識-----------
 if &encoding !=# 'utf-8'
-	set encoding=japan
-	set fileencoding=japan
+set encoding=japan
+set fileencoding=japan
 endif
 
 "#######################
@@ -28,8 +28,8 @@ endif
 " .mdがmarkdownではなくmodula2として認識されるので…
 "================================
 augroup PrevimSettings
-	autocmd!
-	autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
+autocmd!
+autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 
 "#######################
@@ -95,27 +95,46 @@ inoremap <C-p> <Up>
 inoremap <C-f> <Right>
 "	Normal ModeのままEnterで改行挿入
 noremap <CR> o<ESC>
+" 1行->2行表示でもj,kで移動
+nnoremap j gj
+nnoremap k gk
+nnoremap <Down> gj
+nnoremap <Up>   gk
 
 "================================
 " ruby php 自動実行
 " Normal mode -> push 'space key'
 "===============================
-function! ExecuteCurrentFile()
-	if &filetype == 'php' || &filetype == 'ruby'
-		execute '!' . &filetype . ' %'
-	endif
-endfunction
-nnoremap <Space> :call ExecuteCurrentFile()<CR>
+"function! ExecuteCurrentFile()
+"	if &filetype == 'php' || &filetype == 'ruby'
+"		execute '!' . &filetype . ' %'
+"	endif
+"endfunction
+"nnoremap <Space> :call ExecuteCurrentFile()<CR>
 
 "================================
 " python 自動実行
 " push ' CTRL + p '
 "===============================
-function! s:Exec()
-    exe "!" . &ft . " %"        
-:endfunction         
-command! Exec call <SID>Exec() 
-map <silent> <C-P> :call <SID>Exec()<CR>
+"function! s:Exec()
+"	exe "!" . &ft . " %"        
+"	:endfunction         
+"command! Exec call <SID>Exec() 
+"map <silent> <C-P> :call <SID>Exec()<CR>
+
+"================================
+" 実行コマンド挿入
+" push ' CTRL + p '
+"===============================
+autocmd BufNewFile,BufRead *.rb nnoremap <C-p> :!ruby %
+autocmd BufNewFile,BufRead *.py nnoremap <C-p> :!python %
+autocmd BufNewFile,BufRead *.pl nnoremap <C-p> :!perl %
+" shell script
+noremap <C-p> <ESC>:call RUN()<ENTER>
+function! RUN()                     
+	:w|!sudo<Space>./%;read                       
+endfunction
+
 
 "================================
 " 挿入モード時に色を変える
@@ -158,23 +177,12 @@ function! s:GetHighlight(hi)
 	return hl
 endfunction
 
-"================================
-" カレントウィンドウのみ罫線を引く
-" まぁまぁ見づらい
-"===============================
-"augroup cch
-"	autocmd! cch
-"	autocmd WinLeave * set nocursorline
-"	autocmd WinLeave * set nocursorcolumn
-"	autocmd WinEnter,BufRead * set cursorline
-"	autocmd WinEnter,BufRead * set cursorcolumn
-"augroup END
 
 "================================
 " 全角スペースをハイライト
 "===============================
 function! ZenkakuSpace()
-  highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
+	highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
 
 if has('syntax')
@@ -199,55 +207,54 @@ if has('win32') || has('win64')
 else
 	let $VIMDIR = expand('~/.vim')
 endif
+
 "-----------Settings------------
-if has('vim_starting')
-  set runtimepath+=~/.vim/bundle/neobundle.vim/
-endif
-
-call neobundle#rc(expand('~/.vim/bundle/'))
-
-" Let NeoBundle manage NeoBundle
+set runtimepath+=~/.vim/bundle/neobundle.vim/
+call neobundle#begin(expand('~/.vim/bundle/'))
+ 
 NeoBundleFetch 'Shougo/neobundle.vim'
+  
+" ----plugins start---
+" NERDTree, Filer
+NeoBundle 'scrooloose/nerdtree'
 
-"----------add plugins----------
-filetype plugin on
-NeoBundleCheck
-
-NeoBundle 'thinca/vim-quickrun'
-NeoBundle 'jarkdown'
-" Markdown syntax hilight
-NeoBundle 'plasticboy/vim-markdown'
+"Markdown syntax hilight
+"NeoBundle 'plasticboy/vim-markdown'
 " ファイル操作
 NeoBundle 'Shougo/unite.vim'
 " 補完
 NeoBundle 'Shougo/neocomplcache'
 " snippet
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-" smart inputのruby対応版
-NeoBundle "kana/vim-smartinput"
-NeoBundle "cohama/vim-smartinput-endwise"
-call smartinput_endwise#define_default_rules()
-" ruby 自動def end補完 -- endwise
-NeoBundle "tpope/vim-endwise"
+" NeoBundle 'Shougo/neosnippet'
+" NeoBundle 'Shougo/neosnippet-snippets'
 
 " open browser
 NeoBundle 'tyru/open-browser.vim'
 " previm vimで書いたmarkdownをpreview
 NeoBundle 'kannokanno/previm'
-" autosave
-NeoBundle 'vim-scripts/vim-auto-save'
-" cscroll vimでchromeを操作
-NeoBundle 'syui/cscroll.vim'
-" submode 連続スクロール
-NeoBundle 'kana/vim-submode'
 
+" HTML auto reload
+NeoBundle 'tell-k/vim-browsereload-mac'
+
+" HTML coding emmet
+NeoBundle 'mattn/emmet-vim'
+
+" Surround vim
+NeoBundle 'tpope/vim-surround'
+
+" ----plugins end---
+   
+call neobundle#end()
+
+filetype plugin indent on
+" 未インストールのプラグインがある場合インストールするかどうかを毎回尋ねる
+NeoBundleCheck
 "================================
-"		    plug-in settings
-" 			auto-save
+"       NeoBundle end
 "================================
-" enable AutoSave on Vim startup
-let g:auto_save = 1  
+
+
+
 
 "================================
 "		    plug-in settings
@@ -261,66 +268,45 @@ let g:auto_save = 1
 " Markdown Preview
 " <F7>でプレビュー
 nnoremap <silent> <F7> :PrevimOpen<CR>
-" プレビューと同時にフォーカスをiTerm2に戻したければ
-" ただし、注意として､「command -bar PrevimOpen...」のように
-"「-bar」オプションを付ける必要があり
-" http://mba-hack.blogspot.jp/2013/09/mac.html
-" nnoremap <silent> <F7> :PrevimOpen \|:silent !open -a it2_f<CR>
-" [,]+j+j+j...で下にスクロール、[,]+k+k+k...で上にスクロール
-nnoremap <silent> <Leader>j :ChromeScrollDown<CR>
-nnoremap <silent> <Leader>k :ChromeScrollUp<CR>
-call submode#enter_with('cscroll', 'n', '', '<Leader>j', ':ChromeScrollDown<CR>')
-call submode#enter_with('cscroll', 'n', '', '<Leader>k', ':ChromeScrollUp<CR>')
-call submode#leave_with('cscroll', 'n', '', 'n')
-call submode#map('cscroll', 'n', '', 'j', ':ChromeScrollDown<CR>')
-call submode#map('cscroll', 'n', '', 'k', ':ChromeScrollUp<CR>')
- 
-" 現在のタブを閉じる
-nnoremap <silent> <Leader>q :ChromeTabClose<CR>
-" [,]+f+{char}でキーを Google Chrome に送る
-nnoremap <buffer> <Leader>f :ChromeKey<Space>"
 
 "================================
 "		    plug-in settings
-" 			neocomplcache
-" 			vim 補完
+"		    quick starter
 "================================
-"" neocomplcache
-NeoBundle 'Shougo/neocomplcache'
-" Disable AutoComplPop.
-let g:acp_enableAtStartup = 0
-" Use neocomplcache.
-let g:neocomplcache_enable_at_startup = 1
-" Use smartcase.
-let g:neocomplcache_enable_smart_case = 1
-" Set minimum syntax keyword length.
-let g:neocomplcache_min_syntax_length = 3
-let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
+" リロード後に戻ってくるアプリ
+let g:returnApp = "Terminal"
+nmap <Space>bc :ChromeReloadStart<CR>
+nmap <Space>bC :ChromeReloadStop<CR>
+nmap <Space>bf :FirefoxReloadStart<CR>
+nmap <Space>bF :FirefoxReloadStop<CR>
+nmap <Space>bs :SafariReloadStart<CR>
+nmap <Space>bS :SafariReloadStop<CR>
+nmap <Space>bo :OperaReloadStart<CR>
+nmap <Space>bO :OperaReloadStop<CR>
+nmap <Space>ba :AllBrowserReloadStart<CR>
+nmap <Space>bA :AllBrowserReloadStop<CR>
 
-" Define dictionary.
-let g:neocomplcache_dictionary_filetype_lists = {
-    \ 'default' : ''
-		\ }
-
-" Plugin key-mappings.
-inoremap <expr><C-g>     neocomplcache#undo_completion()
-inoremap <expr><C-l>     neocomplcache#complete_common_string()
-
-" Recommended key-mappings.
-" <CR>: close popup and save indent.
-inoremap <silent> <CR> <C-r>=<SID>my_cr_function()<CR>
-function! s:my_cr_function()
-	return neocomplcache#smart_close_popup() . "\<CR>"
-endfunction
-" <TAB>: completion.
-inoremap <expr><TAB>  pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><BS> neocomplcache#smart_close_popup()."\<C-h>"
-inoremap <expr><C-y>  neocomplcache#close_popup()
-"inoremap <expr><C-e>  neocomplcache#cancel_popup()
-
-nnoremap j gj
-nnoremap k gk
-nnoremap <Down> gj
-nnoremap <Up>   gk
+"================================
+"		    plug-in settings
+"		    Emmet 
+"================================
+let g:user_emmet_mode = 'iv'
+let g:user_emmet_leader_key = '<C-Y>'
+let g:use_emmet_complete_tag = 1
+let g:user_emmet_settings = {
+			\ 'lang' : 'ja',
+			\ 'html' : {
+			\   'filters' : 'html',
+			\ },
+			\ 'css' : {
+			\   'filters' : 'fc',
+			\ },
+			\ 'php' : {
+			\   'extends' : 'html',
+			\   'filters' : 'html',
+			\ },
+			\}
+augroup EmmitVim
+	autocmd!
+	autocmd FileType * let g:user_emmet_settings.indentation = '               '[:&tabstop]
+augroup END

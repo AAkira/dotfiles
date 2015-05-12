@@ -2,8 +2,6 @@
 /*
 # dotfileを無視
 /.*
-# mac
-.DS_Store
 
 # 無視したくないファイルを![filename]で指定
 !/.bash_aliases
@@ -11,9 +9,14 @@
 !/.bashrc
 !/.ideavimrc
 !/.vimrc
-!/.vim
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
 !/.my_bash_info
 !/.git-completion.bash # git補完
+!/myscripts/
+
+# この中で除外したいもの
+# mac
+.DS_Store
+.netrwhist
