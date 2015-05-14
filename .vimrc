@@ -96,6 +96,8 @@ inoremap <C-f> <Right>
 inoremap <C-k> <C-o>D
 "	Normal ModeのままEnterで改行挿入
 noremap <CR> o<ESC>
+" 文の途中でも次の行に改行して移動
+inoremap <C-j> <ESC>o
 " 1行->2行表示でもj,kで移動
 nnoremap j gj
 nnoremap k gk
