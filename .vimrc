@@ -103,38 +103,18 @@ nnoremap <Down> gj
 nnoremap <Up>   gk
 
 "================================
-" ruby php 自動実行
-" Normal mode -> push 'space key'
+" [Ctrl + p] script 実行
 "===============================
-"function! ExecuteCurrentFile()
-"	if &filetype == 'php' || &filetype == 'ruby'
-"		execute '!' . &filetype . ' %'
-"	endif
-"endfunction
-"nnoremap <Space> :call ExecuteCurrentFile()<CR>
-
-"================================
-" python 自動実行
-" push ' CTRL + p '
-"===============================
-"function! s:Exec()
-"	exe "!" . &ft . " %"        
-"	:endfunction         
-"command! Exec call <SID>Exec() 
-"map <silent> <C-P> :call <SID>Exec()<CR>
-
-"================================
-" 実行コマンド挿入
-" push ' CTRL + p '
-"===============================
-autocmd BufNewFile,BufRead *.rb nnoremap <C-p> :!ruby %
-autocmd BufNewFile,BufRead *.py nnoremap <C-p> :!python %
-autocmd BufNewFile,BufRead *.pl nnoremap <C-p> :!perl %
-" shell script
-noremap <C-p> <ESC>:call RUN()<ENTER>
-function! RUN()                     
-	:w|!sudo<Space>./%;read                       
+function! ExecuteCurrentFile()
+	if &filetype == 'php' || &filetype == 'ruby' || &filetype == 'python' || &filetype == 'perl' || &filetype == 'sh'
+		execute '!' . &filetype . ' %'
+	elseif &filetype == 'vim'
+		execute :source %
+	elseif &filetype == 'javascript'
+		execute :!node %
+	endif
 endfunction
+nnoremap <C-p> :call ExecuteCurrentFile()<CR>
 
 
 "================================
