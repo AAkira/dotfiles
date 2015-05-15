@@ -105,18 +105,18 @@ nnoremap <Down> gj
 nnoremap <Up>   gk
 
 "================================
-" [Ctrl + p] script 実行
+" [Space] script 実行
 "===============================
 function! ExecuteCurrentFile()
 	if &filetype == 'php' || &filetype == 'ruby' || &filetype == 'python' || &filetype == 'perl' || &filetype == 'sh'
 		execute '!' . &filetype . ' %'
 	elseif &filetype == 'vim'
-		execute :source %
+		execute 'source %'
 	elseif &filetype == 'javascript'
-		execute :!node %
+		execute '!node %'
 	endif
 endfunction
-nnoremap <C-p> :call ExecuteCurrentFile()<CR>
+nnoremap <Space> :call ExecuteCurrentFile()<CR>
 
 
 "================================
@@ -225,6 +225,12 @@ NeoBundle 'mattn/emmet-vim'
 " Surround vim
 NeoBundle 'tpope/vim-surround'
 
+" js補完
+" -----install後 必要-----
+" $ cd $HOME/.vim/bundle/tern_for_vim
+" $ npm install
+NeoBundle 'marijnh/tern_for_vim'
+
 " ----plugins end---
    
 call neobundle#end()
@@ -235,8 +241,6 @@ NeoBundleCheck
 "================================
 "       NeoBundle end
 "================================
-
-
 
 
 "================================
@@ -285,3 +289,4 @@ augroup EmmitVim
 	autocmd!
 	autocmd FileType * let g:user_emmet_settings.indentation = '               '[:&tabstop]
 augroup END
+
