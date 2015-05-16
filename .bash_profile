@@ -1,8 +1,9 @@
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/Applications/eclipse/android/platform-tools:/Applications/eclipse/android/apktool
-ANDROIDNDK_HOME=/Applications/android-ndk-r7
+export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+# android
+export ANDROID_HOME=/Applications/eclipse/android:/Users/a13885/Library/Android/sdk
 export PATH=$PATH:${ANDROIDNDK_HOME}
-export NODE_PATH=/usr/local/lib/node_modules\n
-export ANDROID_HOME=/Applications/eclipse/android
+# node
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # 毎回 source ~/.bashrc するのが面倒なので
 if [ -f ~/.bashrc ] ; then
@@ -18,4 +19,4 @@ export HISTSIZE=10000
 
 # bash info position, git...
 # ここに書くと複雑で長いので外部ファイルを読み込む
-source ./my_bash_info
+source ~/.my_bash_info
