@@ -129,7 +129,7 @@ alias mv='mv -i'
 # plugin download 
 # => https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
 # --------------------------------------------
-source ~/.git-completion.bash
+source ~/myprofile/.git-completion.bash
 
 # ---------------------git--------------------
 alias g='git'

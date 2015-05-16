@@ -17,6 +17,5 @@ shopt -s cdspell
 export HISTFILESIZE=10000
 export HISTSIZE=10000
 
-# bash info position, git...
-# ここに書くと複雑で長いので外部ファイルを読み込む
-source ~/.my_bash_info
+# bash customize 
+source ~/myprofile/.my_bash_info
