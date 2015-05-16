@@ -94,7 +94,7 @@ inoremap <C-n> <Down>
 inoremap <C-p> <Up>
 inoremap <C-f> <Right>
 "	Normal ModeのままEnterで改行挿入
-noremap <CR> o<ESC>
+"noremap <CR> o<ESC>
 
 "================================
 " ruby php 自動実行
