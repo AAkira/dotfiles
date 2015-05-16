@@ -1,4 +1,3 @@
-
 "#######################
 " encording
 "#######################
@@ -9,16 +8,16 @@ set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jis
 
 "-------------------mac----------------------
 if has('mac')
-set termencoding=utf-8
-set encoding=utf-8
-set fileencoding=utf-8
-set fileencodings=utf-8,cp932
+	set termencoding=utf-8
+	set encoding=utf-8
+	set fileencoding=utf-8
+	set fileencodings=utf-8,cp932
 endif
 
 "------------文字コードの自動認識-----------
 if &encoding !=# 'utf-8'
-set encoding=japan
-set fileencoding=japan
+	set encoding=japan
+	set fileencoding=japan
 endif
 
 "#######################
@@ -82,9 +81,9 @@ set suffixesadd+=.rb "gfコマンド ファイル検索の拡張子
 set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可
 set whichwrap=b,s,<,>,[,]	"左右のカーソル移動で行間移動可能
 
-"================================
+"#######################
 "			key map
-"================================
+"#######################
 "	emacs keybind
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
@@ -105,6 +104,18 @@ nnoremap <Down> gj
 nnoremap <Up>   gk
 " コピペずれないようにtoggle
 set pastetoggle=<C-z>
+
+" ************* plugin *************
+" NERDTree plugin
+nnoremap <silent><C-e> :NERDTreeToggle<CR>
+" neocomplete plugin
+inoremap <expr><CR>   pumvisible() ? neocomplete#close_popup() : "<CR>"
+inoremap <expr><C-e>  pumvisible() ? neocomplete#close_popup() : "<End>"
+inoremap <expr><C-f>  pumvisible() ? neocomplete#close_popup()."<Right>" : "<Right>"
+inoremap <expr><C-b>  pumvisible() ? neocomplete#close_popup() : "<Left>"
+inoremap <expr><C-c>  neocomplete#cancel_popup()
+inoremap <expr><C-u>  neocomplete#undo_completion()
+inoremap <expr><C-s>  neocomplete#start_manual_complete()
 
 "================================
 " [Space] script 実行
@@ -162,7 +173,6 @@ function! s:GetHighlight(hi)
 	return hl
 endfunction
 
-
 "================================
 " 全角スペースをハイライト
 "===============================
@@ -200,18 +210,23 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
   
 " ----plugins start---
-" NERDTree, Filer
+" NERDTree
 NeoBundle 'scrooloose/nerdtree'
-
-"Markdown syntax hilight
-"NeoBundle 'plasticboy/vim-markdown'
 " ファイル操作
 NeoBundle 'Shougo/unite.vim'
 " 補完
-NeoBundle 'Shougo/neocomplcache'
+function! s:neobundle_enable()
+	return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
+endfunction
+
+if s:neobundle_enable()
+	NeoBundle 'Shougo/neocomplete'
+else
+	NeoBundle 'Shougo/neocomplcache'
+endif
 " snippet
-" NeoBundle 'Shougo/neosnippet'
-" NeoBundle 'Shougo/neosnippet-snippets'
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 
 " open browser
 NeoBundle 'tyru/open-browser.vim'
@@ -228,10 +243,13 @@ NeoBundle 'mattn/emmet-vim'
 NeoBundle 'tpope/vim-surround'
 
 " js補完
-" -----install後 必要-----
-" $ cd $HOME/.vim/bundle/tern_for_vim
-" $ npm install
-NeoBundle 'marijnh/tern_for_vim'
+" buildに失敗したら
+" ~/.vim/bundle/tern_for_vimでnpm installする
+NeoBundle 'marijnh/tern_for_vim', {
+			\ 'build': {
+			\   'others': 'sudo npm install',
+			\  },
+			\}
 
 " ----plugins end---
    
@@ -292,3 +310,57 @@ augroup EmmitVim
 	autocmd FileType * let g:user_emmet_settings.indentation = '               '[:&tabstop]
 augroup END
 
+"================================
+"		    plug-in settings
+"		    Neocomplete
+"		    [reference]
+"		    https://github.com/Shougo/neocomplete.vim/blob/master/doc/neocomplete.txt
+"================================
+if neobundle#is_installed('neocomplete')
+	" neocomplete用設定
+	" auto start 
+	let g:neocomplete#enable_at_startup = 1
+
+	if !exists('g:neocomplete#keyword_patterns')
+		let g:neocomplete#keyword_patterns = {}
+	endif
+	let g:neocomplete#keyword_patterns._ = '\h\w*'
+	" あいまいok
+	let g:neocomplete#enable_fuzzy_completion = 1
+	" 大文字小文字
+	let g:neocomplete#enable_ignore_case              = 1
+	let g:neocomplete#enable_smart_case               = 1
+	let g:neocomplete#enable_camel_case               = 1
+	" 最初の候補選ばない
+	let g:neocomplete#enable_auto_select							= 0
+
+	call neocomplete#custom_source('_', 'sorters',  ['sorter_length'])
+	call neocomplete#custom_source('_', 'matchers', ['matcher_head'])
+	" Enable omni completion.
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+	" js normal
+	" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	" use tern_for_vim : js completion plugin 
+	autocmd FileType javascript setlocal omnifunc=tern#Complete
+	autocmd FileType typescript setlocal omnifunc=tern#Complete
+
+	" snippet ColorScheme(Terminal using ctermbg)
+	highlight Pmenu ctermbg=180 guibg=#e0dcc0
+	highlight PmenuSel ctermbg=172 guifg=#938f70 guibg=#938f70
+	highlight PmenuSbar ctermbg=138 guibg=#938F70
+elseif neobundle#is_installed('neocomplcache')
+    " neocomplcache用設定
+    let g:neocomplcache_enable_at_startup = 1
+    let g:neocomplcache_enable_ignore_case = 1
+    let g:neocomplcache_enable_smart_case = 1
+    if !exists('g:neocomplcache_keyword_patterns')
+        let g:neocomplcache_keyword_patterns = {}
+    endif
+    let g:neocomplcache_keyword_patterns._ = '\h\w*'
+    let g:neocomplcache_enable_camel_case_completion = 1
+    let g:neocomplcache_enable_underbar_completion = 1
+endif

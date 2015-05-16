@@ -14,3 +14,14 @@ brew install nodebrew
 # nodejs
 sudo nodebrew install-binary stable
 sudo nodebrew use stable
+
+# lua install
+brew install lua
+
+# vim update
+#brew update
+#brew install vim --with-lua
+#sudo mv /usr/bin/vim /usr/bin/old_vim
+#sudo ln /usr/local/Cellar/vim/x.x.xxx/bin/vim /usr/bin/
+# (+lua)になってればok
+#vim --version | grep lua
