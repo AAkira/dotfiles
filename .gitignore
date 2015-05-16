@@ -12,9 +12,8 @@
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
-!/.my_bash_info
-!/.git-completion.bash # git補完
 !/myscripts/
+!/myprofile/
 
 # この中で除外したいもの
 .DS_Store
