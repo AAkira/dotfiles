@@ -87,7 +87,7 @@ fi
 # some more ls aliases
 alias ls="ls -G"
 alias ll='ls -alFG'
-alias la='ls -AG'
+alias la='ls -AFG'
 alias l='ls -CF'
 
 # Add an "alert" alias for long running commands.  Use like so:
@@ -140,3 +140,10 @@ alias g='git'
 export PATH=$PATH:/Applications/eclipse/android/platform-tools
 export PATH=$PATH:/Applications/eclipse/android/tools
 
+# cdと同時にlsする
+function cdls() {
+	# cdがaliasでループするので\をつける
+	\cd $1;
+	ls;
+}
+alias cdl='cdls'
