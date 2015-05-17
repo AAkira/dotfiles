@@ -104,6 +104,12 @@ nnoremap <Down> gj
 nnoremap <Up>   gk
 " コピペずれないようにtoggle
 set pastetoggle=<C-z>
+" 自動挿入
+inoremap { {}<LEFT>
+inoremap [ []<LEFT>
+inoremap ( ()<LEFT>
+inoremap " ""<LEFT>
+inoremap ' ''<LEFT>
 
 " ************* plugin *************
 " NERDTree plugin
@@ -282,16 +288,16 @@ nnoremap <silent> <F7> :PrevimOpen<CR>
 "================================
 " リロード後に戻ってくるアプリ
 let g:returnApp = "Terminal"
-nmap <Space>bc :ChromeReloadStart<CR>
-nmap <Space>bC :ChromeReloadStop<CR>
-nmap <Space>bf :FirefoxReloadStart<CR>
-nmap <Space>bF :FirefoxReloadStop<CR>
-nmap <Space>bs :SafariReloadStart<CR>
-nmap <Space>bS :SafariReloadStop<CR>
-nmap <Space>bo :OperaReloadStart<CR>
-nmap <Space>bO :OperaReloadStop<CR>
-nmap <Space>ba :AllBrowserReloadStart<CR>
-nmap <Space>bA :AllBrowserReloadStop<CR>
+nmap <C-Y>bc :ChromeReloadStart<CR>
+nmap <C-Y>bC :ChromeReloadStop<CR>
+nmap <C-Y>bf :FirefoxReloadStart<CR>
+nmap <C-Y>bF :FirefoxReloadStop<CR>
+nmap <C-Y>bs :SafariReloadStart<CR>
+nmap <C-Y>bS :SafariReloadStop<CR>
+nmap <C-Y>bo :OperaReloadStart<CR>
+nmap <C-Y>bO :OperaReloadStop<CR>
+nmap <C-Y>ba :AllBrowserReloadStart<CR>
+nmap <C-Y>bA :AllBrowserReloadStop<CR>
 
 "================================
 "		    plug-in settings
@@ -343,10 +349,10 @@ if neobundle#is_installed('neocomplete')
 	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
 	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
 	" js normal
-	" autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
 	" use tern_for_vim : js completion plugin 
-	autocmd FileType javascript setlocal omnifunc=tern#Complete
-	autocmd FileType typescript setlocal omnifunc=tern#Complete
+	" autocmd FileType javascript setlocal omnifunc=tern#Complete
+	" autocmd FileType typescript setlocal omnifunc=tern#Complete
 
 	" snippet ColorScheme(Terminal using ctermbg)
 	highlight Pmenu ctermbg=180 guibg=#e0dcc0
