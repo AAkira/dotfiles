@@ -1,4 +1,8 @@
-export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+# default path
+# export PATH=/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin
+# brewのpathを優先/usr/local/bin
+export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
+
 # android
 export ANDROID_HOME=/Applications/eclipse/android:/Users/a13885/Library/Android/sdk
 export PATH=$PATH:${ANDROIDNDK_HOME}

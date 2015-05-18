@@ -19,9 +19,7 @@ sudo nodebrew use stable
 brew install lua
 
 # vim update
-#brew update
-#brew install vim --with-lua
-#sudo mv /usr/bin/vim /usr/bin/old_vim
-#sudo ln /usr/local/Cellar/vim/x.x.xxx/bin/vim /usr/bin/
+brew update
+brew reinstall vim --with-lua
 # (+lua)になってればok
-#vim --version | grep lua
+# vim --version | grep lua

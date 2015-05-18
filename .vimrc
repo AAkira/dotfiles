@@ -110,6 +110,13 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+inoremap ` ``<LEFT>
+" mac clipboard copy
+vnoremap <silent><C-r> :!pbcopy;pbpaste<CR>
+" mac clipboard cut 
+vnoremap <silent><C-x> :!pbcopy<CR>
+" mac clipboard paste 
+nnoremap <silent><C-@> :r !pbpaste<CR>
 
 " ************* plugin *************
 " NERDTree plugin
