@@ -264,6 +264,12 @@ NeoBundle 'marijnh/tern_for_vim', {
 			\  },
 			\}
 
+" python 
+" install後
+" cd ~/.vim/bundle/jedi-vim 内で
+" git submodule update --init
+NeoBundle 'davidhalter/jedi-vim'
+
 " ----plugins end---
    
 call neobundle#end()
@@ -347,24 +353,42 @@ if neobundle#is_installed('neocomplete')
 	" 最初の候補選ばない
 	let g:neocomplete#enable_auto_select							= 0
 
-	call neocomplete#custom_source('_', 'sorters',  ['sorter_length'])
-	call neocomplete#custom_source('_', 'matchers', ['matcher_head'])
-	" Enable omni completion.
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-	" js normal
-	""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	" use tern_for_vim : js completion plugin 
-	" autocmd FileType javascript setlocal omnifunc=tern#Complete
-	" autocmd FileType typescript setlocal omnifunc=tern#Complete
-
 	" snippet ColorScheme(Terminal using ctermbg)
 	highlight Pmenu ctermbg=180 guibg=#e0dcc0
 	highlight PmenuSel ctermbg=172 guifg=#938f70 guibg=#938f70
 	highlight PmenuSbar ctermbg=138 guibg=#938F70
+
+	call neocomplete#custom_source('_', 'sorters',  ['sorter_length'])
+	call neocomplete#custom_source('_', 'matchers', ['matcher_head'])
+
+	" ###### Enable omni completion ######
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+	"=== python ===
+	" docstringは表示しない
+	autocmd FileType python setlocal completeopt-=preview
+	autocmd FileType python let b:did_ftplugin = 1
+	" Not use the default omni
+	"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	" Use jedi plugin
+	autocmd FileType python setlocal omnifunc=jedi#completions
+	let g:jedi#completions_enabled = 0
+	let g:jedi#auto_vim_configuration = 0
+	if !exists('g:neocomplete#force_omni_input_patterns')
+		let g:neocomplete#force_omni_input_patterns = {}
+	endif
+	let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+	" === js ===
+	" Not use the default omni
+	"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	"
+	" Use tern_for_vim : js completion plugin 
+	autocmd FileType javascript setlocal omnifunc=tern#Complete
+	autocmd FileType typescript setlocal omnifunc=tern#Complete
 elseif neobundle#is_installed('neocomplcache')
     " neocomplcache用設定
     let g:neocomplcache_enable_at_startup = 1
@@ -377,3 +401,4 @@ elseif neobundle#is_installed('neocomplcache')
     let g:neocomplcache_enable_camel_case_completion = 1
     let g:neocomplcache_enable_underbar_completion = 1
 endif
+
