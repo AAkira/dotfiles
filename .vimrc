@@ -80,6 +80,8 @@ set suffixesadd+=.rb "gfコマンド ファイル検索の拡張子
 "#######################
 set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可
 set whichwrap=b,s,<,>,[,]	"左右のカーソル移動で行間移動可能
+" file type detect
+filetype detect
 
 "#######################
 "			key map
@@ -110,6 +112,13 @@ inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
 inoremap " ""<LEFT>
 inoremap ' ''<LEFT>
+inoremap ` ``<LEFT>
+" mac clipboard copy
+vnoremap <silent><C-r> :!pbcopy;pbpaste<CR>
+" mac clipboard cut 
+vnoremap <silent><C-x> :!pbcopy<CR>
+" mac clipboard paste 
+nnoremap <silent><C-@> :r !pbpaste<CR>
 
 " ************* plugin *************
 " NERDTree plugin
@@ -195,6 +204,8 @@ if has('syntax')
 	call ZenkakuSpace()
 endif
 
+
+
 "*********************Plug in***************************
 "================================
 "       NeoBundle 
@@ -216,10 +227,21 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
   
 " ----plugins start---
-" NERDTree
-NeoBundle 'scrooloose/nerdtree'
 " ファイル操作
 NeoBundle 'Shougo/unite.vim'
+" Vim proc
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+" snippet
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 " 補完
 function! s:neobundle_enable()
 	return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
@@ -230,24 +252,18 @@ if s:neobundle_enable()
 else
 	NeoBundle 'Shougo/neocomplcache'
 endif
-" snippet
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-
+" NERDTree
+NeoBundle 'scrooloose/nerdtree'
 " open browser
 NeoBundle 'tyru/open-browser.vim'
 " previm vimで書いたmarkdownをpreview
 NeoBundle 'kannokanno/previm'
-
 " HTML auto reload
 NeoBundle 'tell-k/vim-browsereload-mac'
-
 " HTML coding emmet
 NeoBundle 'mattn/emmet-vim'
-
 " Surround vim
 NeoBundle 'tpope/vim-surround'
-
 " js補完
 " buildに失敗したら
 " ~/.vim/bundle/tern_for_vimでnpm installする
@@ -256,6 +272,18 @@ NeoBundle 'marijnh/tern_for_vim', {
 			\   'others': 'sudo npm install',
 			\  },
 			\}
+" python補完 
+" cd ~/.vim/bundle/jedi-vim 内で
+" git submodule update --init
+NeoBundle 'davidhalter/jedi-vim', {
+			\ 'build': {
+			\		'others': 'git submodule update --init'
+			\	},
+			\}
+" indent guide
+NeoBundle 'nathanaelkane/vim-indent-guides'
+" python syntax check
+NeoBundle 'git://github.com/kevinw/pyflakes-vim.git'
 
 " ----plugins end---
    
@@ -340,24 +368,42 @@ if neobundle#is_installed('neocomplete')
 	" 最初の候補選ばない
 	let g:neocomplete#enable_auto_select							= 0
 
-	call neocomplete#custom_source('_', 'sorters',  ['sorter_length'])
-	call neocomplete#custom_source('_', 'matchers', ['matcher_head'])
-	" Enable omni completion.
-	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-	autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
-	" js normal
-	""autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-	" use tern_for_vim : js completion plugin 
-	" autocmd FileType javascript setlocal omnifunc=tern#Complete
-	" autocmd FileType typescript setlocal omnifunc=tern#Complete
-
 	" snippet ColorScheme(Terminal using ctermbg)
 	highlight Pmenu ctermbg=180 guibg=#e0dcc0
 	highlight PmenuSel ctermbg=172 guifg=#938f70 guibg=#938f70
 	highlight PmenuSbar ctermbg=138 guibg=#938F70
+
+	call neocomplete#custom_source('_', 'sorters',  ['sorter_length'])
+	call neocomplete#custom_source('_', 'matchers', ['matcher_head'])
+
+	" ###### Enable omni completion ######
+	autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
+	autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
+	autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
+	autocmd FileType php setlocal omnifunc=phpcomplete#CompletePHP
+
+	"=== python ===
+	" docstringは表示しない
+	autocmd FileType python setlocal completeopt-=preview
+	autocmd FileType python let b:did_ftplugin = 1
+	" Not use the default omni
+	"autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
+	" Use jedi plugin
+	autocmd FileType python setlocal omnifunc=jedi#completions
+	let g:jedi#completions_enabled = 0
+	let g:jedi#auto_vim_configuration = 0
+	if !exists('g:neocomplete#force_omni_input_patterns')
+		let g:neocomplete#force_omni_input_patterns = {}
+	endif
+	let g:neocomplete#force_omni_input_patterns.python = '\h\w*\|[^. \t]\.\w*'
+
+	" === js ===
+	" Not use the default omni
+	"autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
+	"
+	" Use tern_for_vim : js completion plugin 
+	autocmd FileType javascript setlocal omnifunc=tern#Complete
+	autocmd FileType typescript setlocal omnifunc=tern#Complete
 elseif neobundle#is_installed('neocomplcache')
     " neocomplcache用設定
     let g:neocomplcache_enable_at_startup = 1
@@ -369,4 +415,23 @@ elseif neobundle#is_installed('neocomplcache')
     let g:neocomplcache_keyword_patterns._ = '\h\w*'
     let g:neocomplcache_enable_camel_case_completion = 1
     let g:neocomplcache_enable_underbar_completion = 1
+endif
+
+"================================
+"		    plug-in settings
+" nathanaelkane/vim-indent-guides
+"================================
+function CheckFileType()
+	if &filetype == 'php' || &filetype == 'ruby' || &filetype == 'python' || &filetype == 'perl' || &filetype == 'sh' || &filetype == 'vim' || &filetype == 'javascript'
+		return 1
+	endif
+	return 0
+endfunction
+
+if CheckFileType()
+	let g:indent_guides_auto_colors=0
+	let g:indent_guides_enable_on_vim_startup=1
+	let g:indent_guides_guide_size=1
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=151
+	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=186
 endif
