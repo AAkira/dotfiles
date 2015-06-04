@@ -202,6 +202,8 @@ if has('syntax')
 	call ZenkakuSpace()
 endif
 
+
+
 "*********************Plug in***************************
 "================================
 "       NeoBundle 
@@ -223,10 +225,21 @@ call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
   
 " ----plugins start---
-" NERDTree
-NeoBundle 'scrooloose/nerdtree'
 " ファイル操作
 NeoBundle 'Shougo/unite.vim'
+" Vim proc
+NeoBundle 'Shougo/vimproc.vim', {
+\ 'build' : {
+\     'windows' : 'tools\\update-dll-mingw',
+\     'cygwin' : 'make -f make_cygwin.mak',
+\     'mac' : 'make -f make_mac.mak',
+\     'linux' : 'make',
+\     'unix' : 'gmake',
+\    },
+\ }
+" snippet
+NeoBundle 'Shougo/neosnippet'
+NeoBundle 'Shougo/neosnippet-snippets'
 " 補完
 function! s:neobundle_enable()
 	return has('lua') && (v:version > 703 || (v:version == 703 && has('patch885')))
@@ -237,24 +250,18 @@ if s:neobundle_enable()
 else
 	NeoBundle 'Shougo/neocomplcache'
 endif
-" snippet
-NeoBundle 'Shougo/neosnippet'
-NeoBundle 'Shougo/neosnippet-snippets'
-
+" NERDTree
+NeoBundle 'scrooloose/nerdtree'
 " open browser
 NeoBundle 'tyru/open-browser.vim'
 " previm vimで書いたmarkdownをpreview
 NeoBundle 'kannokanno/previm'
-
 " HTML auto reload
 NeoBundle 'tell-k/vim-browsereload-mac'
-
 " HTML coding emmet
 NeoBundle 'mattn/emmet-vim'
-
 " Surround vim
 NeoBundle 'tpope/vim-surround'
-
 " js補完
 " buildに失敗したら
 " ~/.vim/bundle/tern_for_vimでnpm installする
@@ -263,12 +270,22 @@ NeoBundle 'marijnh/tern_for_vim', {
 			\   'others': 'sudo npm install',
 			\  },
 			\}
-
-" python 
-" install後
+" python補完 
 " cd ~/.vim/bundle/jedi-vim 内で
 " git submodule update --init
-NeoBundle 'davidhalter/jedi-vim'
+NeoBundle 'davidhalter/jedi-vim', {
+			\ 'build': {
+			\		'others': 'git submodule update --init'
+			\	},
+			\}
+
+" syntax check
+NeoBundle 'thinca/vim-quickrun'
+
+" indent guide
+NeoBundle 'nathanaelkane/vim-indent-guides'
+" python syntax check
+NeoBundle 'git://github.com/kevinw/pyflakes-vim.git'
 
 " ----plugins end---
    
@@ -402,3 +419,86 @@ elseif neobundle#is_installed('neocomplcache')
     let g:neocomplcache_enable_underbar_completion = 1
 endif
 
+"================================
+"		    plug-in settings
+"		    syntastic 
+"
+" # use pyflakes
+" $ pip install pep8 pyflakes
+" # auto install
+" $ pip install autopep8
+"================================
+"let g:syntastic_python_checkers = ['pyflakes', 'pep8']
+
+"保存時に自動でチェック
+"let g:PyFlakeOnWrite = 1
+"let g:PyFlakeCheckers = 'pep8,mccabe,pyflakes'
+"let g:PyFlakeDefaultComplexity=10'
+
+"================================
+" pythonの書式を整える
+" Shift + L で自動修正
+" http://stackoverflow.com/questions/12374200/using-uncrustify-with-vim/15513829#15513829
+"===============================
+"function! Preserve(command)
+"    " Save the last search.
+"    let search = @/
+"    " Save the current cursor position.
+"    let cursor_position = getpos('.')
+"    " Save the current window position.
+"    normal! H
+"    let window_position = getpos('.')
+"    call setpos('.', cursor_position)
+"    " Execute the command.
+"    execute a:command
+"    " Restore the last search.
+"    let @/ = search
+"    " Restore the previous window position.
+"    call setpos('.', window_position)
+"    normal! zt
+"    " Restore the previous cursor position.
+"    call setpos('.', cursor_position)
+"endfunction
+"
+"function! Autopep8()
+"    call Preserve(':silent %!autopep8 -')
+"endfunction
+"
+"autocmd FileType python nnoremap <S-f> :call Autopep8()<CR>
+
+"autocmd FileType python map <buffer> <F3> :call Autopep8()<CR>
+
+"let s:pyflakes = executable('pyflakes3') ? 'pyflakes3' :
+"      \          executable('python3') ? 'python3' :
+"      \          executable('pyflakes') ? 'pyflakes' :
+"      \          'python'
+"let s:cmdopt = executable('pyflakes3') ? '' :
+"      \          executable('python3') ? '-m pyflakes' :
+"      \          executable('pyflakes') ? '' :
+"      \          '-m pyflakes'
+"let g:quickrun_config["watchdogs_checker/pyflakes3"] = {
+"      \ "command" : s:pyflakes,
+"      \ "cmdopt" : s:cmdopt,
+"      \ "exec"    : "%c %o %s:p",
+"      \ "errorformat" : '%f:%l:%m',
+"      \ }
+"unlet s:pyflakes
+"unlet s:cmdopt
+
+
+let g:quickrun_config = {
+			\   "python/watchdogs_checker" : {
+			\     "type" : "watchdogs_checker/pyflakes3"
+			\   }
+			\ }
+call watchdogs#setup(g:quickrun_config)
+
+"================================
+"		    plug-in settings
+" nathanaelkane/vim-indent-guides
+"================================
+let g:indent_guides_auto_colors=0
+autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=151
+autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=186
+let g:indent_guides_enable_on_vim_startup=1
+let g:indent_guides_guide_size=1
