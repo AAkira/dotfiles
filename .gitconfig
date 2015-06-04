@@ -26,4 +26,8 @@
 	a = add .
 	aa = add --all
 	p = push
+	pl = pull
 	me = merge
+	m = master
+	o = origin
+	u = upstream
