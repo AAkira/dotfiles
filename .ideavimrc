@@ -1,5 +1,30 @@
+" escapse
 imap <C-[> <Esc>
 
 nnoremap g; '[
 nnoremap g, ']
 
+" emacs
+inoremap <C-a> <C-o>^
+inoremap <C-e> <C-o>$<Right>
+inoremap <C-b> <Left>
+inoremap <C-f> <Right>
+inoremap <C-n> <Down>
+inoremap <C-p> <Up>
+inoremap <C-h> <BS>
+inoremap <C-d> <Del>
+inoremap <C-k> <C-o>D<Right>
+
+" modify indent for visual block
+vnoremap < <gv
+vnoremap > >gv
+ 
+" CR at normal mode
+noremap <CR> i<CR><Esc>
+
+" 検索をファイルの先頭へ循環しない
+set nowrapscan
+" 大文字小文字の区別なし
+set ignorecase
+" 検索時に大文字を含んでいたら大/小を区別
+set smartcase
