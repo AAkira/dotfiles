@@ -4,7 +4,7 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # android
-export ANDROID_HOME=/Applications/eclipse/android:/Users/a13885/Library/Android/sdk
+export ANDROID_HOME=/Applications/eclipse/android:/Applications/Android/sdk
 export PATH=$PATH:${ANDROIDNDK_HOME}
 # node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
@@ -27,4 +27,3 @@ export HISTSIZE=10000
 
 # bash customize 
 source ~/myprofile/.my_bash_info
-

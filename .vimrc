@@ -142,6 +142,8 @@ function! ExecuteCurrentFile()
 		execute 'source %'
 	elseif &filetype == 'javascript'
 		execute '!node %'
+	elseif &filetype == 'go'
+		execute '!go run %'
 	endif
 endfunction
 nnoremap <Space> :call ExecuteCurrentFile()<CR>
@@ -280,10 +282,10 @@ NeoBundle 'davidhalter/jedi-vim', {
 			\		'others': 'git submodule update --init'
 			\	},
 			\}
-" indent guide
-NeoBundle 'nathanaelkane/vim-indent-guides'
 " python syntax check
 NeoBundle 'git://github.com/kevinw/pyflakes-vim.git'
+" Go
+NeoBundle 'fatih/vim-go'
 
 " ----plugins end---
    
@@ -405,33 +407,22 @@ if neobundle#is_installed('neocomplete')
 	autocmd FileType javascript setlocal omnifunc=tern#Complete
 	autocmd FileType typescript setlocal omnifunc=tern#Complete
 elseif neobundle#is_installed('neocomplcache')
-    " neocomplcache用設定
-    let g:neocomplcache_enable_at_startup = 1
-    let g:neocomplcache_enable_ignore_case = 1
-    let g:neocomplcache_enable_smart_case = 1
-    if !exists('g:neocomplcache_keyword_patterns')
-        let g:neocomplcache_keyword_patterns = {}
-    endif
-    let g:neocomplcache_keyword_patterns._ = '\h\w*'
-    let g:neocomplcache_enable_camel_case_completion = 1
-    let g:neocomplcache_enable_underbar_completion = 1
+  " neocomplcache用設定
+  let g:neocomplcache_enable_at_startup = 1
+  let g:neocomplcache_enable_ignore_case = 1
+  let g:neocomplcache_enable_smart_case = 1
+  if !exists('g:neocomplcache_keyword_patterns')
+		let g:neocomplcache_keyword_patterns = {}
+  endif
+  let g:neocomplcache_keyword_patterns._ = '\h\w*'
+  let g:neocomplcache_enable_camel_case_completion = 1
+  let g:neocomplcache_enable_underbar_completion = 1
 endif
 
 "================================
 "		    plug-in settings
-" nathanaelkane/vim-indent-guides
+" 					vim go
 "================================
-function CheckFileType()
-	if &filetype == 'php' || &filetype == 'ruby' || &filetype == 'python' || &filetype == 'perl' || &filetype == 'sh' || &filetype == 'vim' || &filetype == 'javascript'
-		return 1
-	endif
-	return 0
-endfunction
-
-if CheckFileType()
-	let g:indent_guides_auto_colors=0
-	let g:indent_guides_enable_on_vim_startup=1
-	let g:indent_guides_guide_size=1
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesOdd   ctermbg=151
-	autocmd VimEnter,Colorscheme * :hi IndentGuidesEven  ctermbg=186
-endif
+let g:go_highlight_functions = 1
+let g:go_highlight_methods = 1
+let g:go_highlight_structs = 1
