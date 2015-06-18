@@ -23,7 +23,13 @@ vnoremap > >gv
 noremap <CR> i<CR><Esc>
 
 " 検索をファイルの先頭へ循環しない
-set nowrapscan
+" set nowrapscan
+" 検索を中心にする
+noremap n nzz
+noremap N Nzz
+noremap * *zz
+noremap # #zz
+
 " 大文字小文字の区別なし
 set ignorecase
 " 検索時に大文字を含んでいたら大/小を区別
