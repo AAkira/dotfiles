@@ -124,13 +124,6 @@ alias rm='rmtrash'
 # --------------------------------------------
 alias mv='mv -i'
 
-# -------------git plugin---------------------
-# git補完
-# plugin download 
-# => https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
-# --------------------------------------------
-source ~/myprofile/.git-completion.bash
-
 # ---------------------git--------------------
 alias g='git'
 

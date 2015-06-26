@@ -31,4 +31,5 @@ export HISTSIZE=10000
 # bash customize 
 source ~/myprofile/.my_bash_info
 # git 補完
-source ~/.git-completion.bash
+# https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+source ~/myprofile/.git-completion.bash
