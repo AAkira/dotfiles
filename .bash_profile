@@ -27,3 +27,5 @@ export HISTSIZE=10000
 
 # bash customize 
 source ~/myprofile/.my_bash_info
+# git 補完
+source ~/.git-completion.bash
