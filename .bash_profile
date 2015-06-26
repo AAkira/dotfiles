@@ -6,6 +6,9 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # android
 export ANDROID_HOME=/Applications/eclipse/android:/Applications/Android/sdk
 export PATH=$PATH:${ANDROIDNDK_HOME}
+export PATH=$PATH:${ANDROIDNDK_HOME}/platform-tools
+export PATH=$PATH:${ANDROIDNDK_HOME}/tools
+
 # node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
 # pyenv

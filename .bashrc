@@ -134,12 +134,6 @@ source ~/myprofile/.git-completion.bash
 # ---------------------git--------------------
 alias g='git'
 
-# -----------------android--------------------
-# pidcat : jake wharton's library
-# --------------------------------------------
-export PATH=$PATH:/Applications/eclipse/android/platform-tools
-export PATH=$PATH:/Applications/eclipse/android/tools
-
 # cdと同時にlsする
 function cdls() {
 	# cdがaliasでループするので\をつける
