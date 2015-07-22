@@ -31,3 +31,4 @@
 	m = master
 	o = origin
 	u = upstream
+	cf = !git ls-files -u | cut -f 2 | sort -u
