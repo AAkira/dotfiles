@@ -115,21 +115,29 @@ if ! shopt -oq posix; then
 fi
 
 # ---------rmtrash plugin---------------------
-# rmでゴミ箱に移動させる
-# sudo を付けるとゴミ箱にいかずに消えるので注意
+# move to the trash using rm command.
+# Caution: don't move to trash if add 'sudo' to the head.
 # --------------------------------------------
 alias rm='rmtrash'
 # --------------------------------------------
-# mv 上書き確認
+# overwrite confirmation 
 # --------------------------------------------
 alias mv='mv -i'
 
-# ---------------------git--------------------
+# -------------------git----------------------
 alias g='git'
+alias pull='git pull origin master'
+alias push='gitPull'
 
-# cdと同時にlsする
+function gitPull() {
+	local repository=${1:-origin}
+	local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
+	git pull origin $branch
+}
+
+# ------------------others--------------------
+# cd + ls
 function cdls() {
-	# cdがaliasでループするので\をつける
 	\cd $1;
 	ls;
 }
