@@ -11,10 +11,11 @@ ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/
 curl https://raw.githubusercontent.com/Shougo/neobundle.vim/master/bin/install.sh | sh
 
 # nodebrew
-brew install nodebrew
+sudo brew install nodebrew
 # nodejs
 sudo nodebrew install-binary stable
 sudo nodebrew use stable
+sudo nodebrew install latest
 
 # lua install
 brew install lua
