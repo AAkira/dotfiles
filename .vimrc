@@ -282,8 +282,8 @@ NeoBundle 'davidhalter/jedi-vim', {
 			\		'others': 'git submodule update --init'
 			\	},
 			\}
-" python syntax check
-NeoBundle 'git://github.com/kevinw/pyflakes-vim.git'
+" python syntax check(python2)
+" NeoBundle 'git://github.com/kevinw/pyflakes-vim.git'
 " Go
 NeoBundle 'fatih/vim-go'
 

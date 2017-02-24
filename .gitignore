@@ -21,3 +21,4 @@
 .svn
 *.pyc
 .swp
+conf.txt # token file
