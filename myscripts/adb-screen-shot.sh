@@ -4,7 +4,9 @@ DATE=`date '+%y%m%d%H%M%S'`
 FILE_NAME=screenshot-${DATE}.png
 YOUR_PATH=~/Desktop
 
-. ../conf.txt
+SCRIPT_DIR=`dirname $0`
+cd $SCRIPT_DIR # move script directory
+source ../conf.txt
 TOKEN=$VALENCIA_SLACK_TOKEN
 
 adb shell screencap -p /sdcard/${FILE_NAME}
