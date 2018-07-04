@@ -12,6 +12,9 @@
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
+!/.zshrc
+!/.common_alias
+!/.oh-my-zsh/
 !/myscripts/
 !/myprofile/
 !/MakeFile
