@@ -1,0 +1,28 @@
+# ls
+alias ls="ls -G"
+alias ll='ls -alFG'
+alias la='ls -AFG'
+alias l='ls -CF'
+
+# git
+alias g='git'
+alias pull='git pull origin master'
+alias push='gitPull'
+
+function gitPull() {
+	local repository=${1:-origin}
+	local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
+	git pull origin $branch
+}
+
+# overwrite confirmation 
+alias mv='mv -i'
+
+# plugins
+
+## rmtrash 
+# ------------------------------------------------------
+# move to the trash using rm command.
+# Caution: don't move to trash if add 'sudo' to the head.
+# ------------------------------------------------------
+alias rm='rmtrash'

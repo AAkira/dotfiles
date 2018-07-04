@@ -114,31 +114,33 @@ if ! shopt -oq posix; then
   fi
 fi
 
-# ---------rmtrash plugin---------------------
-# move to the trash using rm command.
-# Caution: don't move to trash if add 'sudo' to the head.
-# --------------------------------------------
-alias rm='rmtrash'
-# --------------------------------------------
-# overwrite confirmation 
-# --------------------------------------------
-alias mv='mv -i'
+################### add my config ####################
 
-# -------------------git----------------------
-alias g='git'
-alias pull='git pull origin master'
-alias push='gitPull'
+######################## bash ######################## 
 
-function gitPull() {
-	local repository=${1:-origin}
-	local branch=${2:-$(git rev-parse --abbrev-ref HEAD)}
-	git pull origin $branch
-}
+# history
+export HISTFILESIZE=10000
+export HISTSIZE=10000
 
-# ------------------others--------------------
+###################### commands ###################### 
+
 # cd + ls
 function cdls() {
 	\cd $1;
 	ls;
 }
 alias cdl='cdls'
+
+#################### import files  #################### 
+
+source ~/.bash_profile
+if [ -f ~/.common_alias ]; then
+    . ~/.common_alias
+fi
+
+# bash customize 
+source ~/myprofile/.my_bash_info
+
+# git completion
+# https://github.com/git/git/blob/master/contrib/completion/git-completion.bash
+source ~/myprofile/.git-completion.bash
