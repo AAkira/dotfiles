@@ -4,22 +4,37 @@
 /.*
 
 # specify not ignore file
-!/.bash_aliases
+!/README.md
+!/MakeFile
+!/myscripts/
+!/myprofile/
+
+## common profile
 !/.bash_profile
+!/.common_alias
+
+## bash
 !/.bashrc
-!/.ideavimrc
+!/.bash_aliases
+
+## zsh
+!/.zshrc
+!/.oh-my-zsh/
+
+## vim
 !/.vimrc
+
+## git
 !/.gitignore
 !/.gitconfig
 !/.gitmodules
-!/.zshrc
-!/.common_alias
-!/.oh-my-zsh/
-!/myscripts/
-!/myprofile/
-!/MakeFile
-!/README.md
+
+## neo vim
 !/.config/nvim/
+!/.vim/rc/
+
+## IntelliJ
+!/.ideavimrc
 
 # exclude files
 .DS_Store

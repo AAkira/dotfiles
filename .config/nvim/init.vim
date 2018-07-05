@@ -103,9 +103,9 @@ set pastetoggle=<C-z>
 inoremap { {}<LEFT>
 inoremap [ []<LEFT>
 inoremap ( ()<LEFT>
-inoremap " ""<LEFT>
-inoremap ' ''<LEFT>
-inoremap ` ``<LEFT>
+"inoremap " ""<LEFT>
+"inoremap ' ''<LEFT>
+"inoremap ` ``<LEFT>
 " mac clipboard copy
 vnoremap <silent><C-r> :!pbcopy;pbpaste<CR>
 " mac clipboard cut
@@ -115,7 +115,7 @@ nnoremap <silent><C-@> :r !pbpaste<CR>
 
 "================================
 " [Space] script 実行
-"===============================
+"================================
 function! ExecuteCurrentFile()
         if &filetype == 'php' || &filetype == 'ruby' || &filetype == 'python' || &filetype == 'perl' || &filetype == 'sh'
                 execute '!' . &filetype . ' %'
@@ -131,7 +131,7 @@ nnoremap <Space> :call ExecuteCurrentFile()<CR>
 
 "================================
 " 挿入モード時に色を変える
-"===============================
+"================================
 if !exists('g:hi_insert')
         let g:hi_insert = 'highlight StatusLine guifg=White guibg=DarkCyan gui=none ctermfg=White ctermbg=DarkCyan cterm=none'
 endif
@@ -172,7 +172,7 @@ endfunction
 
 "================================
 " 全角スペースをハイライト
-"===============================
+"================================
 function! ZenkakuSpace()
         highlight ZenkakuSpace cterm=reverse ctermfg=DarkMagenta gui=reverse guifg=DarkMagenta
 endfunction
@@ -187,13 +187,9 @@ if has('syntax')
 endif
 
 
-
-
-
-
 "================================
-" dein.nvim
-"===============================
+" dein vim settings
+"================================
 
 "dein Scripts-----------------------------
 
@@ -201,23 +197,36 @@ if &compatible
   set nocompatible               " Be iMproved
 endif
 
-" Required:
-set runtimepath+=/Users/a13885/.cache/dein/repos/github.com/Shougo/dein.vim
+let s:dein_dir = expand('~/.cache/dein') " dein directory
+let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
 
 " Required:
-if dein#load_state('/Users/a13885/.cache/dein')
-  call dein#begin('/Users/a13885/.cache/dein')
+execute 'set runtimepath^=' . s:dein_repo_dir
+
+" Required:
+if dein#load_state(s:dein_dir)
+  call dein#begin(s:dein_dir)
 
   " Let dein manage dein
   " Required:
-  call dein#add('/Users/a13885/.cache/dein/repos/github.com/Shougo/dein.vim')
+  call dein#add(s:dein_repo_dir)
 
+  " Load plugins from toml file
   " Add or remove your plugins here:
-  call dein#add('Shougo/neosnippet.vim')
-  call dein#add('Shougo/neosnippet-snippets')
+"  call dein#add('Shougo/neosnippet.vim')
+"  call dein#add('Shougo/neosnippet-snippets')
 
   " You can specify revision/branch/tag.
-  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+"  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
+
+  " Plugin files
+  let g:rc_dir    = expand('~/.vim/rc')
+  let s:toml      = g:rc_dir . '/dein.toml'
+  let s:lazy_toml = g:rc_dir . '/dein_lazy.toml'
+
+  " Cache TOML files
+  call dein#load_toml(s:toml,      {'lazy': 0})
+  call dein#load_toml(s:lazy_toml, {'lazy': 1})
 
   " Required:
   call dein#end()
@@ -229,8 +238,8 @@ filetype plugin indent on
 syntax enable
 
 " If you want to install not installed plugins on startup.
-"if dein#check_install()
-"  call dein#install()
-"endif
+if dein#check_install()
+  call dein#install()
+endif
 
 "End dein Scripts-------------------------
