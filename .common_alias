@@ -18,6 +18,9 @@ function gitPull() {
 # overwrite confirmation 
 alias mv='mv -i'
 
+# vim
+alias vim='nvim'
+
 # plugins
 
 ## rmtrash 
