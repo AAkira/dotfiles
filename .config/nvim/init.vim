@@ -186,6 +186,18 @@ if has('syntax')
         call ZenkakuSpace()
 endif
 
+"================================
+" normal mode時に半角に切り替え only mac
+"================================
+if has('mac')
+  set ttimeoutlen=1
+  let g:imeoff = 'osascript -e "tell application \"System Events\" to key code 102"'
+  augroup MyIMEGroup
+    autocmd!
+    autocmd InsertLeave * :call system(g:imeoff)
+  augroup END
+  noremap <silent> <ESC> <ESC>:call system(g:imeoff)<CR>
+endif
 
 "================================
 " dein vim settings
