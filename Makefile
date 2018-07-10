@@ -35,10 +35,28 @@ install-plugins:
 
 install-go:
 	brew install go
+	brew install glide
+	go get github.com/golang/mock/gomock
+	go install github.com/golang/mock/mockgen
 
 install-pyenv:
 	brew install pyenv
 	brew install pyenv-virtualenv
+
+install-kube:
+	brew install kubernetes-helm
+	go get github.com/roboll/helmfile
+	brew install direnv
+	brew install stern #pod log https://github.com/wercker/stern
+
+install-aws:
+	pip install awscli
+	brew install git-secrets
+	git secrets --register-aws --global
+
+install-db:
+	brew install mysql
+	pip install mycli
 
 install:
 	cp -r ./ ~/ 
