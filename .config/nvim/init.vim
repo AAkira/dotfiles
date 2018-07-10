@@ -100,9 +100,9 @@ nnoremap <Up>   gk
 " コピペずれないようにtoggle
 set pastetoggle=<C-z>
 " 自動挿入
-inoremap { {}<LEFT>
-inoremap [ []<LEFT>
-inoremap ( ()<LEFT>
+"inoremap { {}<LEFT>
+"inoremap [ []<LEFT>
+"inoremap ( ()<LEFT>
 "inoremap " ""<LEFT>
 "inoremap ' ''<LEFT>
 "inoremap ` ``<LEFT>
