@@ -181,9 +181,18 @@ bindkey '^v' peco-recentd
 #  zsh-completions
 autoload -U compinit && compinit -u
 
+# stern (https://github.com/wercker/stern)
+source <(stern --completion=zsh)
+
+# direnv
+eval "$(direnv hook zsh)"
+
 #################### import files  #################### 
 
 source ~/.bash_profile
+if [ -f ~/.bash_profile.local ]; then
+    . ~/.bash_profile.local
+fi
 if [ -f ~/.common_alias ]; then
     . ~/.common_alias
 fi

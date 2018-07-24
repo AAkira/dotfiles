@@ -36,8 +36,7 @@ install-plugins:
 install-go:
 	brew install go
 	brew install glide
-	go get github.com/golang/mock/gomock
-	go install github.com/golang/mock/mockgen
+	brew install dep
 
 install-pyenv:
 	brew install pyenv
@@ -47,7 +46,10 @@ install-kube:
 	brew install kubernetes-helm
 	go get github.com/roboll/helmfile
 	brew install direnv
-	brew install stern #pod log https://github.com/wercker/stern
+	# pod log https://github.com/wercker/stern
+	brew install stern 
+	# https://github.com/kubernetes/kops
+	brew install kops 
 
 install-aws:
 	pip install awscli
@@ -57,6 +59,15 @@ install-aws:
 install-db:
 	brew install mysql
 	pip install mycli
+
+install-tools:
+	# go mock
+	go get github.com/golang/mock/gomock
+	go install github.com/golang/mock/mockgen
+	# protobuf
+	go get -u google.golang.org/grpc
+	brew install protobuf
+
 
 install:
 	cp -r ./ ~/ 

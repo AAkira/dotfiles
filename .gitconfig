@@ -2,8 +2,8 @@
 	name = AAkira
 	email = developer.a.akira@gmail.com
 [core]
-	excludesfile = /Users/akira/.gitignore_global
-	editor = nvim
+	excludesfile = ~/.gitignore_global
+	editor = nvim -c \"set fenc=utf-8\"
 [difftool "sourcetree"]
 	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
 	path = 
@@ -41,3 +41,5 @@
 	allowed = wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
 [include]
     path = ~/.gitconfig.local
+[commit]
+	template = ~/.stCommitMsg
