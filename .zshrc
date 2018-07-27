@@ -7,7 +7,7 @@ export ZSH="/Users/a13885/.oh-my-zsh"
 # Set name of the theme to load. Optionally, if you set this to "random"
 # it'll load a random theme each time that oh-my-zsh is loaded.
 # See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-ZSH_THEME="kphoen"
+ZSH_THEME="aatheme" # use my theme base on "kphoen"
 
 # Set list of themes to load
 # Setting this variable when ZSH_THEME=random
@@ -176,6 +176,11 @@ function peco-recentd () {
 zle -N peco-recentd
 bindkey '^v' peco-recentd
 
+
+function kube-current-context () {
+  echo $(kubectl config current-context)
+}
+
 ####################### plugin ####################### 
 
 #  zsh-completions
@@ -196,3 +201,4 @@ fi
 if [ -f ~/.common_alias ]; then
     . ~/.common_alias
 fi
+

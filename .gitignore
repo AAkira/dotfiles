@@ -36,6 +36,9 @@
 ## IntelliJ
 !/.ideavimrc
 
+## misc
+!/git-misc
+
 # exclude files
 .DS_Store
 .netrwhist

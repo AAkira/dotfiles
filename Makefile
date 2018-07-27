@@ -22,6 +22,8 @@ install-zsh:
 	sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	# install completions
 	sudo git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
+	ln -s ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes
 
 install-vim:
 	# install neo vim
