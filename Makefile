@@ -68,8 +68,8 @@ install-tools:
 	go install github.com/golang/mock/mockgen
 	# protobuf
 	go get -u google.golang.org/grpc
+	go get -u github.com/golang/protobuf/protoc-gen-go
 	brew install protobuf
-
 
 install:
 	cp -r ./ ~/ 
