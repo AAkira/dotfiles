@@ -1,9 +1,7 @@
 # base on kphoen.zsh-theme
 
-kube=`kubectl config current-context`
-
 if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
-    PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info) ⎈ %{$fg[cyan]%}${kube}]
+    PROMPT='[%{$fg[red]%}%n%{$reset_color%}@%{$fg[magenta]%}%m%{$reset_color%}:%{$fg[blue]%}%~%{$reset_color%}$(git_prompt_info) ⎈ %{$fg[cyan]%}${KUBE_PS1_CONTEXT}]
 %# '
 
     ZSH_THEME_GIT_PROMPT_PREFIX=" on %{$fg[green]%}"
@@ -23,7 +21,7 @@ if [[ "$TERM" != "dumb" ]] && [[ "$DISABLE_LS_COLORS" != "true" ]]; then
     ZSH_THEME_GIT_PROMPT_UNMERGED="%{$fg[yellow]%} ═"
     ZSH_THEME_GIT_PROMPT_UNTRACKED="%{$fg[cyan]%} ✭"
 else
-    PROMPT='[%n@%m:%~$(git_prompt_info) ⎈ %{$fg[cyan]%}${kube}]
+    PROMPT='[%n@%m:%~$(git_prompt_info) ⎈ %{$fg[cyan]%}$(kube-current-context)]
 %# '
 
     ZSH_THEME_GIT_PROMPT_PREFIX=" on"

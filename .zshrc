@@ -177,9 +177,13 @@ zle -N peco-recentd
 bindkey '^v' peco-recentd
 
 
-function kube-current-context () {
-  echo $(kubectl config current-context)
+# kube-context for prompt
+function _kube-current-context () {
+  KUBE_PS1_CONTEXT=$(kubectl config current-context)
 }
+
+autoload -Uz add-zsh-hook
+add-zsh-hook precmd _kube-current-context
 
 ####################### plugin ####################### 
 
