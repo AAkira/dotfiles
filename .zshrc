@@ -196,7 +196,6 @@ function _switch-profile () {
    * ) profile="Default";;
   esac
   
-  echo $profile
   echo -ne "\033]1337;SetProfile=$profile\a"
 }
 add-zsh-hook precmd _switch-profile
