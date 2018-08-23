@@ -185,6 +185,22 @@ function _kube-current-context () {
 autoload -Uz add-zsh-hook
 add-zsh-hook precmd _kube-current-context
 
+# kube-context for background on iterm2
+
+function _switch-profile () {
+  # set the same name on iterm profile name
+  case "$KUBE_PS1_CONTEXT" in
+   dev* ) profile="Default";;
+   stg* ) profile="Stg";;
+   prd* ) profile="Prd";;
+   * ) profile="Default";;
+  esac
+  
+  echo $profile
+  echo -ne "\033]1337;SetProfile=$profile\a"
+}
+add-zsh-hook precmd _switch-profile
+
 ####################### plugin ####################### 
 
 #  zsh-completions
