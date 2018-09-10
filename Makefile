@@ -44,6 +44,12 @@ install-pyenv:
 	brew install pyenv
 	brew install pyenv-virtualenv
 
+install-node:
+	brew install nodebrew
+	mkdir -p ~/.nodebrew/src
+	# nodebrew ls-remote  // show version list
+	# nodebrew install-binary v8.11.4 // install 
+
 install-kube:
 	brew install kubernetes-helm
 	go get github.com/roboll/helmfile
