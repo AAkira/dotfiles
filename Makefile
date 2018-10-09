@@ -1,9 +1,9 @@
 mac:
-	/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew update --force && brew upgrade
 	brew install rmtrash
 
-install-develop:
+install-dev-tools:
 	sudo easy_install pip
 	make install-zsh
 	make install-vim
