@@ -8,6 +8,7 @@ install-dev-tools:
 	make install-zsh
 	make install-vim
 	make install-plugins
+	make install-java
 	make install-go
 	make install-pyenv
 
@@ -34,6 +35,9 @@ install-vim:
 
 install-plugins:
 	brew install peco
+
+install-java:
+	brew cask install java8
 
 install-go:
 	brew install go
