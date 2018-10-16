@@ -80,6 +80,9 @@ install-tools:
 	go get -u google.golang.org/grpc
 	go get -u github.com/golang/protobuf/protoc-gen-go
 	brew install protobuf
+	# keynote highlight
+	brew install highlight
+	brew install luarocks
 
 install:
 	cp -r ./ ~/ 
