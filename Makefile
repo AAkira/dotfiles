@@ -7,7 +7,6 @@ install-dev-tools:
 	sudo easy_install pip
 	make install-zsh
 	make install-vim
-	make install-plugins
 	make install-java
 	make install-go
 	make install-pyenv
@@ -33,16 +32,17 @@ install-vim:
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 	sh ./installer.sh ~/.cache/dein
 
-install-plugins:
-	brew install peco
-
 install-java:
 	brew cask install java8
 
 install-go:
 	brew install go
+	# dependencies
 	brew install glide
 	brew install dep
+	# go mock
+	go get github.com/golang/mock/gomock
+	go install github.com/golang/mock/mockgen
 
 install-pyenv:
 	brew install pyenv
@@ -71,11 +71,9 @@ install-aws:
 install-db:
 	brew install mysql
 	pip install mycli
+	brew install redis
 
 install-tools:
-	# go mock
-	go get github.com/golang/mock/gomock
-	go install github.com/golang/mock/mockgen
 	# protobuf
 	go get -u google.golang.org/grpc
 	go get -u github.com/golang/protobuf/protoc-gen-go
@@ -83,6 +81,8 @@ install-tools:
 	# keynote highlight
 	brew install highlight
 	brew install luarocks
+	# peco
+	brew install peco
 
 install:
 	cp -r ./ ~/ 
