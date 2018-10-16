@@ -97,6 +97,20 @@ nnoremap j gj
 nnoremap k gk
 nnoremap <Down> gj
 nnoremap <Up>   gk
+" ignore function keys
+noremap! <F1> <nop>
+noremap! <F2> <nop>
+noremap! <F3> <nop>
+noremap! <F4> <nop>
+noremap! <F5> <nop>
+noremap! <F6> <nop>
+noremap! <F7> <nop>
+noremap! <F8> <nop>
+noremap! <F9> <nop>
+noremap! <F10> <nop>
+noremap! <F11> <nop>
+noremap! <F12> <nop>
+noremap! <F13> <nop>
 " コピペずれないようにtoggle
 set pastetoggle=<C-z>
 " 自動挿入
