@@ -4,7 +4,7 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
 
 # android
-export ANDROID_HOME=/Applications/eclipse/android:/Applications/Android/sdk:/Applications/android-sdk:~/Library/Android/sdk
+export ANDROID_HOME=~/Library/Android/sdk
 export PATH=$PATH:${ANDROID_HOME}
 export PATH=$PATH:${ANDROID_HOME}/platform-tools
 export PATH=$PATH:${ANDROID_HOME}/tools
