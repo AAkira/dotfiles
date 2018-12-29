@@ -77,7 +77,7 @@ set whichwrap=b,s,<,>,[,]       "左右のカーソル移動で行間移動可�
 filetype detect
 
 "#######################
-" key map
+" keymap
 "#######################
 " emacs keybind
 inoremap <C-a> <Home>
@@ -126,6 +126,11 @@ vnoremap <silent><C-r> :!pbcopy;pbpaste<CR>
 vnoremap <silent><C-x> :!pbcopy<CR>
 " mac clipboard paste
 nnoremap <silent><C-@> :r !pbpaste<CR>
+
+"================================
+" plugin keymap
+"================================
+nnoremap <silent><C-e> :NERDTreeToggle %<CR>
 
 "================================
 " [Space] script 実行
@@ -269,3 +274,4 @@ if dein#check_install()
 endif
 
 "End dein Scripts-------------------------
+
