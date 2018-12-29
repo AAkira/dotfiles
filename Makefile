@@ -62,6 +62,8 @@ install-kube:
 	brew install stern 
 	# https://github.com/kubernetes/kops
 	brew install kops 
+	# https://github.com/GoogleContainerTools/skaffold
+	brew install skaffold
 
 install-aws:
 	pip install awscli
@@ -73,6 +75,22 @@ install-db:
 	pip install mycli
 	brew install redis
 
+install-ios:
+	# cocoapods
+	sudo gem update --system -n /usr/local/bin
+	sudo gem install -n /usr/local/bin cocoapods
+	pod setup
+	# xvim
+	echo "[キーチェーンアクセス]->[証明書アシスタント]->[証明書を作成]"
+	echo "name: XcodeSigner, 自己署名ルート, コード署名"
+	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
+	mkdir -p XcodeProjects
+	cd XcodeProjects
+	git clone https://github.com/XVimProject/XVim2
+	xcode-select -p # success: /Applications/Xcode.app/Contents/Developer | set `xcode-select -s` if failure
+	cd XVim2
+	make
+
 install-tools:
 	# protobuf
 	go get -u google.golang.org/grpc
@@ -83,6 +101,10 @@ install-tools:
 	brew install luarocks
 	# peco
 	brew install peco
+	# jq
+	brew install jq
+	# tree
+	brew install tree
 
 install:
 	cp -r ./ ~/ 
