@@ -200,6 +200,19 @@ function _switch-profile () {
 }
 add-zsh-hook precmd _switch-profile
 
+# open xcode project
+
+function xc() {
+  xcw=`find . -name *.xcworkspace`
+  sco=`find . -name *.xcodeproj`
+
+  if [[ -n ${xcw} ]]; then
+    open ${xcw}
+  elif [[ -n ${xco} ]]; then
+    open ${xco}
+  fi
+}
+
 ####################### plugin ####################### 
 
 #  zsh-completions
