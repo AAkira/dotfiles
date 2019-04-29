@@ -84,8 +84,9 @@ install-ios:
 	sudo gem install -n /usr/local/bin cocoapods
 	pod setup
 	# xvim
-	echo "[キーチェーンアクセス]->[証明書アシスタント]->[証明書を作成]"
-	echo "name: XcodeSigner, 自己署名ルート, コード署名"
+	@echo "[キーチェーンアクセス]->[証明書アシスタント]->[証明書を作成]"
+	@echo "name: XcodeSigner, 自己署名ルート, コード署名"
+	@read -p "Enter keys if you set it: "
 	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
 	mkdir -p XcodeProjects
 	cd XcodeProjects
@@ -111,3 +112,4 @@ install-tools:
 
 install:
 	cp -r ./ ~/ 
+
