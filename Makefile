@@ -89,11 +89,9 @@ install-ios:
 	@read -p "Enter keys if you set it: "
 	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
 	mkdir -p XcodeProjects
-	cd XcodeProjects
-	git clone https://github.com/XVimProject/XVim2
-	xcode-select -p # success: /Applications/Xcode.app/Contents/Developer | set `xcode-select -s` if failure
-	cd XVim2
-	make
+	cd XcodeProjects && git clone https://github.com/XVimProject/XVim2
+	cd XcodeProjects && xcode-select -p # success: /Applications/Xcode.app/Contents/Developer | set `xcode-select -s` if failure
+	cd XcodeProjects/XVim2 &&	make
 
 install-tools:
 	# protobuf
