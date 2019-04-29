@@ -18,6 +18,8 @@ install-zsh:
 	chsh -s /usr/local/bin/zsh
 	# install oh-my-zsh
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+	# restore dotfile
+	cp ~/dotfiles/.zshrc ~/
 	# install syntax highlight
 	sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 	# install completions
@@ -51,8 +53,8 @@ install-pyenv:
 install-node:
 	brew install nodebrew
 	mkdir -p ~/.nodebrew/src
+	nodebrew install-binary latest
 	# nodebrew ls-remote  // show version list
-	# nodebrew install-binary v8.11.4 // install 
 
 install-kube:
 	brew install kubernetes-helm
