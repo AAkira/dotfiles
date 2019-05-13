@@ -17,4 +17,8 @@ make install-vim        # install neo vim
 I use the nvim.
 I don't use the .vimrc now.
 
-nvim config file is [`~/.config/nvim/init.vim`](https://github.com/AAkira/dotfiles/blob/master/.config/nvim/init.vim)
+The nvim config file is [`~/.config/nvim/init.vim`](https://github.com/AAkira/dotfiles/blob/master/.config/nvim/init.vim)
+
+I manage plugins using dein.vim.
+The dein.vim config file is [`.vim/rc/dein_lazy.toml`](https://github.com/AAkira/dotfiles/blob/master/.vim/rc/dein_lazy.toml)
+

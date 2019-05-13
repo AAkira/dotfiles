@@ -57,6 +57,9 @@ install-node:
 	nodebrew use stable
 	# nodebrew ls-remote  // show version list
 
+install-yarn:
+	brew install yarn
+
 install-kube:
 	brew install kubernetes-helm
 	go get github.com/roboll/helmfile

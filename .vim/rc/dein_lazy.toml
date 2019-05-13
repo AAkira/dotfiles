@@ -13,7 +13,12 @@ on_i = 1
 on_ft = ['snippet']
 
 [[plugins]]
-repo   = 'Shougo/unite.vim'
+repo = 'Shougo/unite.vim'
 
 [[plugins]]
-repo   = 'scrooloose/nerdtree'
+repo = 'scrooloose/nerdtree'
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'cd app & yarn install'

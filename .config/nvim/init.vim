@@ -131,6 +131,7 @@ nnoremap <silent><C-@> :r !pbpaste<CR>
 " plugin keymap
 "================================
 nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+nmap <C-p> <Plug>MarkdownPreview
 
 "================================
 " [Space] script 実行
@@ -275,3 +276,10 @@ endif
 
 "End dein Scripts-------------------------
 
+"================================
+" plugin settings
+"================================
+
+" Markdown preview
+" https://github.com/iamcco/markdown-preview.nvim
+let g:mkdp_auto_start = 0
