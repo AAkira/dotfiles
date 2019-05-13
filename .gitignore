@@ -39,6 +39,9 @@
 ## misc
 !/git-misc
 
+## trash folder
+!/.old
+
 # exclude files
 .DS_Store
 .netrwhist
