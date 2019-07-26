@@ -48,4 +48,4 @@
 .svn
 *.pyc
 .swp
-conf.txt # token file
+.aa-conf # my token file

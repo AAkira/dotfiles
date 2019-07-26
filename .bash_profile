@@ -27,3 +27,6 @@ export PATH="$HOME/flutter/bin:$PATH"
 
 # myscript
 export PATH=$PATH:$HOME/myscripts
+
+# read my tokens
+source ~/.aa-conf
