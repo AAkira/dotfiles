@@ -50,6 +50,12 @@ install-pyenv:
 	brew install pyenv
 	brew install pyenv-virtualenv
 
+install-rubyenv:
+	brew install rbenv
+	brew install ruby-build
+	rbenv install $(rbenv install -l | grep -v - | tail -1)
+	rbenv global $(rbenv install -l | grep -v - | tail -1)
+
 install-node:
 	brew install nodebrew
 	mkdir -p ~/.nodebrew/src
@@ -101,6 +107,8 @@ install-tools:
 	go get -u google.golang.org/grpc
 	go get -u github.com/golang/protobuf/protoc-gen-go
 	brew install protobuf
+	# graphql
+	npm install -g apollo
 	# keynote highlight
 	brew install highlight
 	brew install luarocks
