@@ -118,6 +118,16 @@ install-tools:
 	brew install jq
 	# tree
 	brew install tree
+	
+setup-default-extension:
+	# open some files by CotEditor because there are opened by XCode
+	brew install duti
+	duti -s com.coteditor.CotEditor txt all
+	duti -s com.coteditor.CotEditor json all
+	duti -s com.coteditor.CotEditor xml all
+	duti -s com.coteditor.CotEditor kt all
+	duti -s com.coteditor.CotEditor java all
+	duti -s com.coteditor.CotEditor css all
 
 install:
 	cp -r ./ ~/ 
