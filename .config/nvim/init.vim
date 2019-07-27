@@ -131,7 +131,7 @@ nnoremap <silent><C-@> :r !pbpaste<CR>
 " plugin keymap
 "================================
 nnoremap <silent><C-e> :NERDTreeToggle %<CR>
-nmap <C-p> <Plug>MarkdownPreview
+nmap <C-p> <Plug>MarkdownPreviewToggle
 
 "================================
 " [Space] script 実行
@@ -159,6 +159,7 @@ endif
 if has('unix') && !has('gui_running')
         inoremap <silent> <ESC> <ESC>
         inoremap <silent> <C-[> <ESC>
+        inoremap <silent> <C-]> <ESC>
 endif
 
 if has('syntax')
@@ -283,3 +284,5 @@ endif
 " Markdown preview
 " https://github.com/iamcco/markdown-preview.nvim
 let g:mkdp_auto_start = 0
+let g:mkdp_browser = 'safari'
+
