@@ -129,6 +129,11 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor java all
 	duti -s com.coteditor.CotEditor css all
 
+install-misc:
+	# https://github.com/fumiyas/home-commands/blob/master/echo-sd
+	brew tap fumiyas/echo-sd
+	brew install echo-sd
+
 install:
 	cp -r ./ ~/ 
 

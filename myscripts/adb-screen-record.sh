@@ -7,7 +7,7 @@ YOUR_PATH=~/Desktop
 SCRIPT_DIR=`dirname $0`
 cd $SCRIPT_DIR # move script directory
 source ../conf.txt
-TOKEN=$VALENCIA_SLACK_TOKEN
+TOKEN=$SLACK_TOKEN
 
 adb shell screenrecord /sdcard/${FILE_NAME}.mp4 &
 pid=`ps x | grep -v grep | grep "adb shell screenrecord" | awk '{ print $1 }'`
