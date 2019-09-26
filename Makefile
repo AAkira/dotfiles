@@ -92,6 +92,10 @@ install-ios:
 	sudo gem update --system -n /usr/local/bin
 	sudo gem install -n /usr/local/bin cocoapods
 	pod setup
+	# swimat
+	brew cask install swimat
+	@echo "Open swimat app"
+	@echo "Xcode > Editor > Swimat"
 	# xvim
 	@echo "[キーチェーンアクセス]->[証明書アシスタント]->[証明書を作成]"
 	@echo "name: XcodeSigner, 自己署名ルート, コード署名"
@@ -101,6 +105,11 @@ install-ios:
 	cd XcodeProjects && git clone https://github.com/XVimProject/XVim2
 	cd XcodeProjects && xcode-select -p # success: /Applications/Xcode.app/Contents/Developer | set `xcode-select -s` if failure
 	cd XcodeProjects/XVim2 &&	make
+
+update-xvim:
+	cd XcodeProjects && git pull origin master
+	cd XcodeProjects/XVim2 && make
+	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
 
 install-tools:
 	# protobuf
@@ -128,6 +137,7 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor kt all
 	duti -s com.coteditor.CotEditor java all
 	duti -s com.coteditor.CotEditor css all
+	duti -s com.coteditor.CotEditor md all
 
 install-misc:
 	# https://github.com/fumiyas/home-commands/blob/master/echo-sd
