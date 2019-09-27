@@ -62,6 +62,8 @@ install-node:
 	nodebrew install-binary stable
 	nodebrew use stable
 	# nodebrew ls-remote  // show version list
+	@echo check version list: nodebrew ls-remote
+	@echo install specified version: nodebrew install-binary [v8.11.4]
 
 install-yarn:
 	brew install yarn
