@@ -113,6 +113,20 @@ update-xvim:
 	cd XcodeProjects/XVim2 && make
 	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
 
+install-flutter:
+	# check the latest version
+	# https://flutter.dev/docs/get-started/install/macos
+	curl -O https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip
+	unzip flutter_macos_v1.0.0-stable.zip
+	mv flutter ~/
+	# check $ flutter doctor
+	brew update
+	brew install --HEAD usbmuxd
+	brew link usbmuxd
+	brew install --HEAD libimobiledevice
+	brew install ideviceinstaller
+	brew install ios-deploy
+
 install-tools:
 	# protobuf
 	go get -u google.golang.org/grpc
