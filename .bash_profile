@@ -28,7 +28,8 @@ export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
 # flutter
-export PATH="$HOME/flutter/bin:$PATH"
+export FLUTTER_ROOT="$HOME/flutter"
+export PATH="$FLUTTER_ROOT/bin:$PATH"
 
 # myscript
 export PATH=$PATH:$HOME/myscripts
