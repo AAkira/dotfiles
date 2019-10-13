@@ -286,3 +286,6 @@ endif
 let g:mkdp_auto_start = 0
 let g:mkdp_browser = 'safari'
 
+" NerdTree
+" Show dot files
+let NERDTreeShowHidden=1
