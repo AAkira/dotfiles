@@ -222,6 +222,7 @@ autoload -U compinit && compinit -u
 source <(stern --completion=zsh)
 
 # direnv
+export EDITOR='nvim'
 eval "$(direnv hook zsh)"
 
 #################### import files  #################### 
