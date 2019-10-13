@@ -154,6 +154,7 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor java all
 	duti -s com.coteditor.CotEditor css all
 	duti -s com.coteditor.CotEditor md all
+	duti -s com.coteditor.CotEditor yml all
 
 install-misc:
 	# https://github.com/fumiyas/home-commands/blob/master/echo-sd
