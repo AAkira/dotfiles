@@ -49,6 +49,11 @@ install-go:
 install-pyenv:
 	brew install pyenv
 	brew install pyenv-virtualenv
+	# check list
+	# $ pyenv install --list
+	# $ pyenv install 3.7.3
+	# $ pyenv global 3.7.3
+	brew install pipenv
 
 install-rubyenv:
 	brew install rbenv
