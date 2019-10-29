@@ -6,8 +6,8 @@ alias l='ls -CF'
 
 # git
 alias g='git'
-alias pull='git pull origin master'
-alias push='gitPull'
+alias pull='git pull origin $(current_branch)'
+alias push='git push origin $(current_branch)'
 
 function gitPull() {
 	local repository=${1:-origin}
