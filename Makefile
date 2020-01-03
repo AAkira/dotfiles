@@ -10,6 +10,7 @@ install-dev-tools:
 	make install-java
 	make install-go
 	make install-pyenv
+	make install-node
 
 install-zsh:
 	# install zsh
@@ -33,6 +34,22 @@ install-vim:
 	# install dein vim
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 	sh ./installer.sh ~/.cache/dein
+
+install-linter:
+	npm install textlint --global
+	# For Japanese
+	npm i -g textlint-rule-max-ten textlint-rule-spellcheck-tech-word textlint-rule-no-mix-dearu-desumasu
+	# js linter
+	npm install -g eslint
+	# js formatter
+	npm install prettier -D
+	# python errror checker
+	pip install pyflakes
+	# python linter
+	pip install pep8
+	# python formatter
+	pip install --upgrade autopep8
+	pip install isort
 
 install-java:
 	brew cask install java8

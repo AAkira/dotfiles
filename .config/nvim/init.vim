@@ -1,5 +1,5 @@
 "#######################
-" encording
+" Encording
 "#######################
 set fenc=utf-8
 set encoding=utf-8
@@ -21,7 +21,7 @@ if &encoding !=# 'utf-8'
 endif
 
 "#######################
-" file format
+" File format
 "#######################
 "================================
 " .mdがmarkdownではなくmodula2として認識されるので…
@@ -32,7 +32,7 @@ autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
 augroup END
 
 "#######################
-" 表示系
+" Display
 "#######################
 set number "行番号表示
 set showmode "モード表示
@@ -48,7 +48,7 @@ set autoindent
 set smartindent
 
 "#######################
-" プログラミング系
+" Programing
 "#######################
 syntax on "カラー表示
 set smartindent "オートインデント
@@ -59,7 +59,7 @@ set smartindent "オートインデント
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
 "#######################
-" 検索系
+" Search
 "#######################
 set ignorecase "検索文字列が小文字の場合は大文字小文字を区別なく検索する
 set smartcase "検索文字列に大文字が含まれている場合は区別して検索する
@@ -69,7 +69,7 @@ set nohlsearch "検索結果文字列の非ハイライト表示
 set suffixesadd+=.rb "gfコマンド ファイル検索の拡張子
 
 "#######################
-" その他
+" Others
 "#######################
 set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可
 set whichwrap=b,s,<,>,[,]       "左右のカーソル移動で行間移動可能
@@ -77,7 +77,7 @@ set whichwrap=b,s,<,>,[,]       "左右のカーソル移動で行間移動可�
 filetype detect
 
 "#######################
-" keymap
+" Keymap
 "#######################
 " emacs keybind
 inoremap <C-a> <Home>
@@ -277,15 +277,3 @@ endif
 
 "End dein Scripts-------------------------
 
-"================================
-" plugin settings
-"================================
-
-" Markdown preview
-" https://github.com/iamcco/markdown-preview.nvim
-let g:mkdp_auto_start = 0
-let g:mkdp_browser = 'safari'
-
-" NerdTree
-" Show dot files
-let NERDTreeShowHidden=1

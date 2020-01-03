@@ -17,8 +17,58 @@ repo = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
+hook_add = '''
+let NERDTreeShowHidden=1
+'''
 
 [[plugins]]
 repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'cd app & yarn install'
+hook_add = '''
+let g:mkdp_auto_start = 0
+let g:mkdp_browser = 'safari'
+'''
+
+[[plugins]]
+repo = 'dense-analysis/ale'
+on_i = 1
+hook_add = '''
+let g:ale_sign_column_always = 1
+let g:ale_lint_on_save = 1
+let g:ale_lint_on_text_changed = 0
+
+let g:ale_linters = {
+  \ 'javascript': ['eslint'],
+  \ 'python': ['pyflakes', 'pep8'],
+  \ 'ruby': ['rubocop'],
+  \ 'text': ['textlint'],
+  \ 'markdown': ['textlint'],
+  \ 'css': ['stylelint'],
+  \ }
+
+let g:ale_fixers = {
+      \ 'javascript': ['prettier'],
+      \ 'python': ['autopep8', 'isort'],
+      \ }
+let g:ale_fix_on_save = 1
+'''
+
+[[plugins]]
+repo = 'maximbaz/lightline-ale'
+on_i = 1
+depends = ['lightline.vim', 'ale']
+hook_add = '''
+let g:lightline.component_expand = {
+  \  'linter_checking': 'lightline#ale#checking',
+  \  'linter_warnings': 'lightline#ale#warnings',
+  \  'linter_errors': 'lightline#ale#errors',
+  \  'linter_ok': 'lightline#ale#ok',
+  \ }
+let g:lightline.component_type = {
+  \  'linter_checking': 'left',
+  \  'linter_warnings': 'warning',
+  \  'linter_errors': 'error',
+  \  'linter_ok': 'left',
+  \ }
+'''
