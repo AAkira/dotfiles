@@ -79,7 +79,7 @@ filetype detect
 "#######################
 " Keymap
 "#######################
-" emacs keybind
+" emacs keybind - insert mode
 inoremap <C-a> <Home>
 inoremap <C-e> <End>
 inoremap <C-d> <Del>
@@ -88,6 +88,14 @@ inoremap <C-n> <Down>
 inoremap <C-p> <Up>
 inoremap <C-f> <Right>
 inoremap <C-k> <C-o>D
+" emacs keybind - command mode
+cnoremap <C-a> <Home>
+cnoremap <C-e> <End>
+cnoremap <C-d> <Del>
+cnoremap <C-b> <Left>
+cnoremap <C-n> <Down>
+cnoremap <C-p> <Up>
+cnoremap <C-f> <Right>
 " Normal ModeのままEnterで改行挿入
 noremap <CR> o<ESC>
 " 文の途中でも次の行に改行して移動
