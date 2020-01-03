@@ -12,23 +12,21 @@ depends = ['neosnippet-snippets']
 on_i = 1
 on_ft = ['snippet']
 
+# ========== File ==========
 [[plugins]]
 repo = 'Shougo/unite.vim'
 
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
+nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+
 let NERDTreeShowHidden=1
 '''
 
 [[plugins]]
-repo = 'iamcco/markdown-preview.nvim'
-on_ft = ['markdown', 'pandoc.markdown', 'rmd']
-build = 'cd app & yarn install'
-hook_add = '''
-let g:mkdp_auto_start = 0
-let g:mkdp_browser = 'safari'
 '''
+# ========== Linter, Formatter ==========
 
 [[plugins]]
 repo = 'dense-analysis/ale'
@@ -72,3 +70,17 @@ let g:lightline.component_type = {
   \  'linter_ok': 'left',
   \ }
 '''
+
+# ========== Others ==========
+
+[[plugins]]
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'cd app & yarn install'
+hook_add = '''
+nmap <C-p> <Plug>MarkdownPreviewToggle
+
+let g:mkdp_auto_start = 0
+let g:mkdp_browser = 'safari'
+'''
+

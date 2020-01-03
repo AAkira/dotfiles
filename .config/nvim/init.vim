@@ -138,8 +138,7 @@ nnoremap <silent><C-@> :r !pbpaste<CR>
 "================================
 " plugin keymap
 "================================
-nnoremap <silent><C-e> :NERDTreeToggle %<CR>
-nmap <C-p> <Plug>MarkdownPreviewToggle
+" Written in ~/.vim/rc/dein.toml
 
 "================================
 " [Space] script 実行

@@ -39,6 +39,12 @@
 ## misc
 !/git-misc
 
+## eslint
+!/.eslintrc.json
+
+## textlintrc
+!/.textlintrc
+
 ## trash folder
 !/.old
 

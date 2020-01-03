@@ -1,0 +1,11 @@
+{
+  "rules": {
+    "preset-ja-technical-writing": true,
+    // textlint-rule-max-ten
+    "max-ten": {
+        "max" : 3
+    },
+    // textlint-rule-no-mix-dearu-desumasu
+    "no-mix-dearu-desumasu": true,
+  }
+}
