@@ -127,6 +127,7 @@ repo = "tpope/vim-fugitive"
 
 # ========== Others ==========
 
+# ----- markdown -----
 [[plugins]]
 repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
@@ -138,3 +139,12 @@ hook_add = '''
   let g:mkdp_browser = 'safari'
 '''
 
+# ----- comment out -----
+[[plugins]]
+repo = 'tpope/vim-commentary'
+on_i = 1
+
+# ----- add and remove pairs -----
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+on_i = 1
