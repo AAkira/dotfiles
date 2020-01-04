@@ -91,6 +91,9 @@ install-node:
 	@echo check version list: nodebrew ls-remote
 	@echo install specified version: nodebrew install-binary [v8.11.4]
 
+install-ts:
+	npm install -g typescript
+
 install-yarn:
 	brew install yarn
 
