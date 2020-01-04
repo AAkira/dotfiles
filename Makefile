@@ -36,6 +36,9 @@ install-vim:
 	sh ./installer.sh ~/.cache/dein
 	# pynvim 
 	# pip install pynvim
+	# nerd font
+	brew tap homebrew/cask-fonts
+	brew cask install font-hack-nerd-font
 
 install-linter:
 	npm install textlint --global

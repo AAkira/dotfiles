@@ -10,6 +10,10 @@ hook_add = '''
   let NERDTreeShowHidden=1
 '''
 
+[[plugins]]
+repo = 'ryanoasis/vim-devicons'
+# install this font: font-hack-nerd-font
+
 # ========== Auto completion ==========
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
