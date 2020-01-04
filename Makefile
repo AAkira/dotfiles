@@ -34,6 +34,8 @@ install-vim:
 	# install dein vim
 	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
 	sh ./installer.sh ~/.cache/dein
+	# pynvim 
+	# pip install pynvim
 
 install-linter:
 	npm install textlint --global
@@ -50,6 +52,8 @@ install-linter:
 	# python formatter
 	pip install --upgrade autopep8
 	pip install isort
+	# vim
+	pip install vim-vint
 
 install-java:
 	brew cask install java8

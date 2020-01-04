@@ -1,17 +1,3 @@
-[[plugins]]
-repo = 'Shougo/neocomplete.vim'
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/neosnippet-snippets'
-on_i = 1
-
-[[plugins]]
-repo = 'Shougo/neosnippet'
-depends = ['neosnippet-snippets']
-on_i = 1
-on_ft = ['snippet']
-
 # ========== File ==========
 [[plugins]]
 repo = 'Shougo/unite.vim'
@@ -19,37 +5,82 @@ repo = 'Shougo/unite.vim'
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 hook_add = '''
-nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+  nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+  
+  let NERDTreeShowHidden=1
+'''
 
-let NERDTreeShowHidden=1
+# ========== Auto completion ==========
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+on_event = 'InsertCharPre'
+on_i = 1
+hook_source = '''
+  let g:deoplete#enable_at_startup = 1
+  let g:deoplete#auto_complete_delay = 0
+  let g:deoplete#auto_complete_start_length = 1
+  let g:deoplete#enable_camel_case = 0
+  let g:deoplete#enable_ignore_case = 0
+  let g:deoplete#enable_refresh_always = 0
+  let g:deoplete#enable_smart_case = 1
+  let g:deoplete#file#enable_buffer_path = 1
+  let g:deoplete#max_list = 10000
 '''
 
 [[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['neosnippet-snippets', 'context_filetype.vim']
+on_i = 1
+hook_source = '''
+  let g:neosnippet#enable_completed_snippet = 1
+  if has('conceal')
+    set conceallevel=2 concealcursor=niv
+  endif
 '''
+
+[[plugins]]
+repo = 'wokalski/autocomplete-flow'
+depends = ['deoplete.nvim']
+on_i = 1
+hook_source = '''
+  let g:autocomplete_flow#insert_paren_after_function = 0
+'''
+
+[[plugins]]
+repo = 'deoplete-plugins/deoplete-jedi'
+depends = ['deoplete.nvim']
+on_i = 1
+
 # ========== Linter, Formatter ==========
 
 [[plugins]]
 repo = 'dense-analysis/ale'
 on_i = 1
 hook_add = '''
-let g:ale_sign_column_always = 1
-let g:ale_lint_on_save = 1
-let g:ale_lint_on_text_changed = 0
-
-let g:ale_linters = {
-  \ 'javascript': ['eslint'],
-  \ 'python': ['pyflakes', 'pep8'],
-  \ 'ruby': ['rubocop'],
-  \ 'text': ['textlint'],
-  \ 'markdown': ['textlint'],
-  \ 'css': ['stylelint'],
-  \ }
-
-let g:ale_fixers = {
-      \ 'javascript': ['prettier'],
-      \ 'python': ['autopep8', 'isort'],
-      \ }
-let g:ale_fix_on_save = 1
+  let g:ale_sign_column_always = 1
+  let g:ale_lint_on_save = 1
+  let g:ale_lint_on_text_changed = 0
+  
+  let g:ale_linters = {
+    \ 'javascript': ['eslint'],
+    \ 'python': ['pyflakes', 'pep8'],
+    \ 'ruby': ['rubocop'],
+    \ 'text': ['textlint'],
+    \ 'markdown': ['textlint'],
+    \ 'css': ['stylelint'],
+    \ }
+  
+  let g:ale_fixers = {
+        \ 'javascript': ['prettier'],
+        \ 'python': ['autopep8', 'isort'],
+        \ }
+  let g:ale_fix_on_save = 1
 '''
 
 [[plugins]]
@@ -57,18 +88,20 @@ repo = 'maximbaz/lightline-ale'
 on_i = 1
 depends = ['lightline.vim', 'ale']
 hook_add = '''
-let g:lightline.component_expand = {
-  \  'linter_checking': 'lightline#ale#checking',
-  \  'linter_warnings': 'lightline#ale#warnings',
-  \  'linter_errors': 'lightline#ale#errors',
-  \  'linter_ok': 'lightline#ale#ok',
-  \ }
-let g:lightline.component_type = {
-  \  'linter_checking': 'left',
-  \  'linter_warnings': 'warning',
-  \  'linter_errors': 'error',
-  \  'linter_ok': 'left',
-  \ }
+  let g:lightline.component_expand = {
+    \  'linter_checking': 'lightline#ale#checking',
+    \  'linter_warnings': 'lightline#ale#warnings',
+    \  'linter_errors': 'lightline#ale#errors',
+    \  'linter_ok': 'lightline#ale#ok',
+    \ }
+  let g:lightline.component_type = {
+    \  'linter_checking': 'left',
+    \  'linter_warnings': 'warning',
+    \  'linter_errors': 'error',
+    \  'linter_ok': 'left',
+    \ }
+'''
+
 '''
 
 # ========== Others ==========
@@ -78,9 +111,9 @@ repo = 'iamcco/markdown-preview.nvim'
 on_ft = ['markdown', 'pandoc.markdown', 'rmd']
 build = 'cd app & yarn install'
 hook_add = '''
-nmap <C-p> <Plug>MarkdownPreviewToggle
-
-let g:mkdp_auto_start = 0
-let g:mkdp_browser = 'safari'
+  nmap <C-p> <Plug>MarkdownPreviewToggle
+  
+  let g:mkdp_auto_start = 0
+  let g:mkdp_browser = 'safari'
 '''
 
