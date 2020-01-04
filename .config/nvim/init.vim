@@ -69,6 +69,11 @@ set nohlsearch "検索結果文字列の非ハイライト表示
 set suffixesadd+=.rb "gfコマンド ファイル検索の拡張子
 
 "#######################
+" substitution
+"#######################
+set inccommand=split "Show diff preview
+
+"#######################
 " Others
 "#######################
 set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可

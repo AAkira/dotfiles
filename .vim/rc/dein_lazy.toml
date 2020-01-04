@@ -102,7 +102,24 @@ hook_add = '''
     \ }
 '''
 
+# ========== Git ==========
+
+[[plugins]]
+# Show icons on left line
+repo = 'airblade/vim-gitgutter'
+hook_add = '''
+  let g:gitgutter_override_sign_column_highlight = 0
+  highlight GitGutterAdd ctermfg=blue ctermbg=brown
+  set updatetime=100
+  
+  " prevent to conflict the dense-analysis/ale
+  set signcolumn=yes
+  nnoremap <silent> <C-g><C-g> :GitGutterLineHighlightsToggle<CR>
 '''
+
+[[plugins]]
+# Add the :Gdiff command
+repo = "tpope/vim-fugitive"
 
 # ========== Others ==========
 
