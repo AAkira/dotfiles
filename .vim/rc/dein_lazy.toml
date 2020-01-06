@@ -6,6 +6,11 @@ repo = 'Shougo/unite.vim'
 repo = 'scrooloose/nerdtree'
 hook_add = '''
   nnoremap <silent><C-e> :NERDTreeToggle %<CR>
+  "Launch NERDTree if there aren't arguments
+  autocmd vimenter * if !argc() | NERDTree | endif
+
+  "Close NERDTree when files close
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
   
   let NERDTreeShowHidden=1
 '''
