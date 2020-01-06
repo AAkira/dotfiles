@@ -150,6 +150,6 @@ repo = 'tpope/vim-commentary'
 on_i = 1
 
 # ----- add and remove pairs -----
-[[plugins]]
-repo = 'jiangmiao/auto-pairs'
-on_i = 1
+# [[plugins]]
+# repo = 'jiangmiao/auto-pairs'
+# on_i = 1
