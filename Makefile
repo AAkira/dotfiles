@@ -96,6 +96,7 @@ install-node:
 
 install-ts:
 	npm install -g typescript
+	npm install -g ts-node
 
 install-yarn:
 	brew install yarn

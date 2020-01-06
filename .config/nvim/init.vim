@@ -155,6 +155,8 @@ function! ExecuteCurrentFile()
                 execute 'source %'
         elseif &filetype == 'javascript'
                 execute '!node %'
+        elseif &filetype == 'typescript'
+                execute '!ts-node %'
         elseif &filetype == 'go'
                 execute '!go run %'
         endif
