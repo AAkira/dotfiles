@@ -17,7 +17,7 @@ hook_add = '''
 
 [[plugins]]
 repo = 'ryanoasis/vim-devicons'
-# install this font: font-hack-nerd-font
+# should install this font: font-hack-nerd-font
 
 # ========== Auto completion ==========
 [[plugins]]
@@ -113,8 +113,8 @@ hook_add = '''
 
 # ========== Git ==========
 
-[[plugins]]
 # Show icons on left line
+[[plugins]]
 repo = 'airblade/vim-gitgutter'
 hook_add = '''
   let g:gitgutter_override_sign_column_highlight = 0
@@ -126,8 +126,8 @@ hook_add = '''
   nnoremap <silent> <C-g><C-g> :GitGutterLineHighlightsToggle<CR>
 '''
 
-[[plugins]]
 # Add the :Gdiff command
+[[plugins]]
 repo = "tpope/vim-fugitive"
 
 # ========== Others ==========
