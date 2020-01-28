@@ -149,8 +149,9 @@ update-xvim:
 install-flutter:
 	# check the latest version
 	# https://flutter.dev/docs/get-started/install/macos
-	curl -O https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip
-	unzip flutter_macos_v1.0.0-stable.zip
+	# curl -O https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip
+	# unzip flutter_macos_v1.0.0-stable.zip
+	git clone https://github.com/flutter/flutter.git
 	mv flutter ~/
 	# check $ flutter doctor
 	brew update
