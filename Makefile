@@ -27,6 +27,8 @@ install-zsh:
 	sudo git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
 	ln -s ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes
+	# zsh-autosuggestions 
+	sudo git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
 install-vim:
 	# install neo vim

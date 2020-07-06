@@ -64,6 +64,7 @@ plugins=(
   zsh-completions
   docker
   docker-compose
+  zsh-autosuggestions
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -217,8 +218,11 @@ function xc() {
 
 ####################### plugin ####################### 
 
-#  zsh-completions
+# zsh-completions
 autoload -U compinit && compinit -u
+
+# zsh-autosuggestions
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=250"
 
 # stern (https://github.com/wercker/stern)
 source <(stern --completion=zsh)
