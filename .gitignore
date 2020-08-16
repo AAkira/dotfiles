@@ -48,6 +48,9 @@
 ## trash folder
 !/.old
 
+## My key map
+!/keyboard/jisplit89/
+
 # exclude files
 .DS_Store
 .netrwhist
