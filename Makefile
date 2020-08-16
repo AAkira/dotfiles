@@ -3,6 +3,17 @@ mac:
 	brew update --force && brew upgrade
 	brew install rmtrash
 
+init-mac:
+	# screen shot settings
+	defaults write com.apple.screencapture disable-shadow -boolean true
+	defaults write com.apple.screencapture type jpg
+	# key speed
+	defaults write -g KeyRepeat -int 2
+	defaults write -g InitialKeyRepeat -int 15
+	# finder
+	defaults write com.apple.finder _FXShowPosixPathInTitle -boolean true && killall Finder
+	defaults write com.apple.finder AppleShowAllFiles true && killall Finder off
+
 install-dev-tools:
 	sudo easy_install pip
 	make install-zsh
@@ -179,6 +190,8 @@ install-tools:
 	brew install jq
 	# tree
 	brew install tree
+	# webp
+	brew cask install WebPQuickLook
 	
 setup-default-extension:
 	# open some files by CotEditor because there are opened by XCode
