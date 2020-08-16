@@ -112,6 +112,8 @@ setopt IGNOREEOF
 HISTFILE=~/.zsh_history
 HISTSIZE=100000
 SAVEHIST=100000
+HISTTIMEFORMAT='%Y-%m-%dT%T%z '
+
 ## share history
 setopt share_history
 ## remove old history if it is duplicate
