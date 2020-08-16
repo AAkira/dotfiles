@@ -34,3 +34,7 @@ noremap # #zz
 set ignorecase
 " 検索時に大文字を含んでいたら大/小を区別
 set smartcase
+
+" yank not copy to clicp board
+set clipboard-=unnamed
+
