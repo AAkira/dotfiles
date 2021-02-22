@@ -18,6 +18,9 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
 
+# poetry
+export PATH="$HOME/.poetry/bin:$PATH"
+
 # rbenv
 [[ -d ~/.rbenv  ]] && \
   export PATH=${HOME}/.rbenv/bin:${PATH} && \
@@ -50,3 +53,5 @@ fi
 # SDK_MAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
+export PATH="$HOME/.poetry/bin:$PATH"
