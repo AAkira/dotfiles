@@ -30,9 +30,8 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# flutter
-export FLUTTER_ROOT="$HOME/flutter"
-export PATH="$FLUTTER_ROOT/bin:$PATH"
+# flutter fvm
+export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # myscript
 export PATH=$PATH:$HOME/myscripts

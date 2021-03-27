@@ -11,6 +11,8 @@ install-dev-tools:
 	make install-go
 	make install-pyenv
 	make install-node
+	make install-dart
+	make install-fvm
 
 install-zsh:
 	# install zsh
@@ -62,6 +64,15 @@ install-linter:
 
 install-java:
 	brew cask install java8
+
+install-dart:
+	brew tap dart-lang/dart
+	brew install dart
+	brew upgrade dart
+
+install-fvm:
+	# flutter
+	pub global activate fvm
 
 install-go:
 	brew install go
