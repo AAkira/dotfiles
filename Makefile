@@ -1,8 +1,10 @@
+.PHONY: mac
 mac:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew update --force && brew upgrade
 	brew install rmtrash
 
+.PHONY: init-mac
 init-mac:
 	# screen shot settings
 	defaults write com.apple.screencapture disable-shadow -boolean true
@@ -14,6 +16,7 @@ init-mac:
 	defaults write com.apple.finder _FXShowPosixPathInTitle -boolean true && killall Finder
 	defaults write com.apple.finder AppleShowAllFiles true && killall Finder off
 
+.PHONY: install-dev-tools
 install-dev-tools:
 	sudo easy_install pip
 	make install-zsh
@@ -22,7 +25,10 @@ install-dev-tools:
 	make install-go
 	make install-pyenv
 	make install-node
+	make install-dart
+	make install-fvm
 
+.PHONY: install-zsh
 install-zsh:
 	# install zsh
 	brew install zsh
@@ -41,6 +47,7 @@ install-zsh:
 	# zsh-autosuggestions 
 	sudo git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
 
+.PHONY: install-vim
 install-vim:
 	# install neo vim
 	brew install neovim/neovim/neovim
@@ -53,6 +60,7 @@ install-vim:
 	brew tap homebrew/cask-fonts
 	brew cask install font-hack-nerd-font
 
+.PHONY: install-linter
 install-linter:
 	npm install textlint --global
 	# For Japanese
@@ -71,9 +79,22 @@ install-linter:
 	# vim
 	pip install vim-vint
 
+.PHONY: install-java
 install-java:
 	brew cask install java8
 
+.PHONY: install-dart
+install-dart:
+	brew tap dart-lang/dart
+	brew install dart
+	brew upgrade dart
+
+.PHONY: install-fvm
+install-fvm:
+	# flutter
+	pub global activate fvm
+
+.PHONY: install-go
 install-go:
 	brew install go
 	# dependencies
@@ -83,6 +104,7 @@ install-go:
 	go get github.com/golang/mock/gomock
 	go install github.com/golang/mock/mockgen
 
+.PHONY: install-pyenv
 install-pyenv:
 	brew install pyenv
 	brew install pyenv-virtualenv
@@ -92,12 +114,14 @@ install-pyenv:
 	# $ pyenv global 3.7.3
 	brew install pipenv
 
-install-rubyenv:
+.PHONY: install-rbenv
+install-rbenv:
 	brew install rbenv
 	brew install ruby-build
 	rbenv install $(rbenv install -l | grep -v - | tail -1)
 	rbenv global $(rbenv install -l | grep -v - | tail -1)
 
+.PHONY: install-node
 install-node:
 	brew install nodebrew
 	mkdir -p ~/.nodebrew/src
@@ -107,13 +131,16 @@ install-node:
 	@echo check version list: nodebrew ls-remote
 	@echo install specified version: nodebrew install-binary [v8.11.4]
 
+.PHONY: install-ts
 install-ts:
 	npm install -g typescript
 	npm install -g ts-node
 
+.PHONY: install-yarn
 install-yarn:
 	brew install yarn
 
+.PHONY: install-kube
 install-kube:
 	brew install kubernetes-helm
 	go get github.com/roboll/helmfile
@@ -125,16 +152,19 @@ install-kube:
 	# https://github.com/GoogleContainerTools/skaffold
 	brew install skaffold
 
+.PHONY: install-aws
 install-aws:
 	pip install awscli
 	brew install git-secrets
 	git secrets --register-aws --global
 
+.PHONY: install-db
 install-db:
 	brew install mysql
 	pip install mycli
 	brew install redis
 
+.PHONY: install-ios
 install-ios:
 	# cocoapods
 	sudo gem update --system -n /usr/local/bin
@@ -154,26 +184,13 @@ install-ios:
 	cd XcodeProjects && xcode-select -p # success: /Applications/Xcode.app/Contents/Developer | set `xcode-select -s` if failure
 	cd XcodeProjects/XVim2 &&	make
 
+.PHONY: install-xvim
 update-xvim:
 	cd XcodeProjects && git pull origin master
 	cd XcodeProjects/XVim2 && make
 	sudo codesign -f -s XcodeSigner /Applications/Xcode.app
 
-install-flutter:
-	# check the latest version
-	# https://flutter.dev/docs/get-started/install/macos
-	# curl -O https://storage.googleapis.com/flutter_infra/releases/stable/macos/flutter_macos_v1.0.0-stable.zip
-	# unzip flutter_macos_v1.0.0-stable.zip
-	git clone https://github.com/flutter/flutter.git
-	mv flutter ~/
-	# check $ flutter doctor
-	brew update
-	brew install --HEAD usbmuxd
-	brew link usbmuxd
-	brew install --HEAD libimobiledevice
-	brew install ideviceinstaller
-	brew install ios-deploy
-
+.PHONY: install-tools
 install-tools:
 	# protobuf
 	go get -u google.golang.org/grpc
@@ -193,6 +210,7 @@ install-tools:
 	# webp
 	brew cask install WebPQuickLook
 	
+.PHONY: setup-default-extension
 setup-default-extension:
 	# open some files by CotEditor because there are opened by XCode
 	brew install duti
@@ -205,11 +223,13 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor md all
 	duti -s com.coteditor.CotEditor yml all
 
+.PHONY: install-misc
 install-misc:
 	# https://github.com/fumiyas/home-commands/blob/master/echo-sd
 	brew tap fumiyas/echo-sd
 	brew install echo-sd
 
+.PHONY: install
 install:
 	cp -r ./ ~/ 
 
