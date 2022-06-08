@@ -1,5 +1,8 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
+# asdf
+. $(brew --prefix asdf)/asdf.sh
+
 # java
 export JAVA_HOME=`/usr/libexec/java_home -v 11`
 PATH="$PATH:$JAVA_HOME/bin"
@@ -12,6 +15,10 @@ export PATH=$PATH:${ANDROID_HOME}/tools
 
 # node
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+## nvm
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
@@ -31,7 +38,7 @@ export PATH="$HOME/.poetry/bin:$PATH"
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# flutter fvm
+# flutter (fvm)
 export PATH="$PATH":"$HOME/.pub-cache/bin"
 
 # myscript
@@ -53,6 +60,7 @@ fi
 # SDK_MAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+
 export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/docker-compose-v1"
 export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/"
 
