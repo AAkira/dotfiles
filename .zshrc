@@ -122,6 +122,8 @@ setopt hist_ignore_all_dups
 setopt hist_reduce_blanks
 ## Don't record history command
 setopt hist_no_store
+## Don't record history if the head is space
+setopt hist_ignore_space 
 
 ## history binding
 bindkey '^r' history-incremental-pattern-search-backward
@@ -130,7 +132,7 @@ autoload -Uz history-search-end
 zle -N history-beginning-search-backward-end history-search-end
 zle -N history-beginning-search-forward-end history-search-end
 
-# ignore duplicate history
+## ignore duplicate history
 setopt histignorealldups
 
 # modify correct command

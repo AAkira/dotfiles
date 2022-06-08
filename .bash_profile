@@ -1,7 +1,8 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
 # java
-export JAVA_HOME=`/usr/libexec/java_home -v 1.8`
+export JAVA_HOME=`/usr/libexec/java_home -v 11`
+PATH="$PATH:$JAVA_HOME/bin"
 
 # android
 export ANDROID_HOME=~/Library/Android/sdk
@@ -52,5 +53,7 @@ fi
 # SDK_MAN
 export SDKMAN_DIR="$HOME/.sdkman"
 [[ -s "$HOME/.sdkman/bin/sdkman-init.sh" ]] && source "$HOME/.sdkman/bin/sdkman-init.sh"
+export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/docker-compose-v1"
+export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/"
 
 export PATH="$HOME/.poetry/bin:$PATH"
