@@ -29,3 +29,7 @@ alias vim='nvim'
 # Caution: don't move to trash if add 'sudo' to the head.
 # ------------------------------------------------------
 alias rm='rmtrash'
+
+# kubernetes
+alias k="kubectl"
+
