@@ -228,9 +228,6 @@ autoload -U compinit && compinit -u
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=250"
 
-# stern (https://github.com/wercker/stern)
-source <(stern --completion=zsh)
-
 # direnv
 export EDITOR='nvim'
 eval "$(direnv hook zsh)"
