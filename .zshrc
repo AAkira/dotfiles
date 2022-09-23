@@ -234,15 +234,14 @@ function xc() {
 
 ####################### plugin ####################### 
 
+export EDITOR='nvim'
+
 # zsh-completions
 autoload -U compinit && compinit -u
 
 # zsh-autosuggestions
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=250"
 
-# direnv
-export EDITOR='nvim'
-eval "$(direnv hook zsh)"
 
 #################### import files  #################### 
 
