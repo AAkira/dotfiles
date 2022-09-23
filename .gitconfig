@@ -46,3 +46,5 @@
     path = ~/.gitconfig.local
 [commit]
 	template = ~/.stCommitMsg
+[ghq]
+	root = ~/src
