@@ -249,6 +249,8 @@ source ~/.bash_profile
 if [ -f ~/.bash_profile.local ]; then
     . ~/.bash_profile.local
 fi
+
+# alias
 if [ -f ~/.common_alias ]; then
     . ~/.common_alias
 fi

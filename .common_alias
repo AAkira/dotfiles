@@ -23,12 +23,10 @@ alias vim='nvim'
 
 # plugins
 
-## rmtrash 
-# ------------------------------------------------------
-# move to the trash using rm command.
-# Caution: don't move to trash if add 'sudo' to the head.
-# ------------------------------------------------------
-alias rm='rmtrash'
+## trash
+if type trash > /dev/null 2>&1; then
+  alias rm='trash -F'
+fi
 
 # kubernetes
 alias k="kubectl"
