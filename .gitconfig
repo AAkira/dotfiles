@@ -48,3 +48,5 @@
 	template = ~/.stCommitMsg
 [ghq]
 	root = ~/src
+[merge]
+	conflictStyle = diff3
