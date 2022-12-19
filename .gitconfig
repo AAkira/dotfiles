@@ -34,6 +34,7 @@
 	u = upstream
 	cf = !git ls-files -u | cut -f 2 | sort -u
 	delete-merged = !"git branch --merged | grep -v '*' | xargs -I % git branch -d %"
+	pushf = "push --force-with-lease --force-if-includes"
 [secrets]
 	providers = git secrets --aws-provider
 	patterns = [A-Z0-9]{20}
