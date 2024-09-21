@@ -48,6 +48,11 @@ install-vim:
 	# install neo vim
 	brew install neovim
 
+.PHONY: install-vim-theme
+install-vim-theme:
+	cd ~/.config/nvim/colors
+	curl https://github.com/lifepillar/vim-solarized8/tree/master/colors/solarized8.vim -o solarized8.vim
+
 .PHONY: install-asdf
 install-asdf:
 	brew install asdf
