@@ -1,4 +1,11 @@
 "#######################
+" Path
+"#######################
+let g:python_host_prog = system('echo -n $(which python2)')
+let g:python3_host_prog = system('echo -n $(which python3)')
+let g:ruby_host_prog = system('echo -n $(which ruby)')
+
+"#######################
 " Encording
 "#######################
 set fenc=utf-8
@@ -235,8 +242,31 @@ if has('mac')
 endif
 
 "================================
+" stolarized theme
+" https://github.com/lifepillar/vim-solarized8
+"================================
+colorscheme solarized8
+
+"================================
 " dein vim settings
 "================================
+
+"install Scripts--------------------------
+let $CACHE = expand('~/.cache')
+if !($CACHE->isdirectory())
+  call mkdir($CACHE, 'p')
+endif
+if &runtimepath !~# '/dein.vim'
+  let s:dir = 'dein.vim'->fnamemodify(':p')
+  if !(s:dir->isdirectory())
+    let s:dir = $CACHE .. '/dein/repos/github.com/Shougo/dein.vim'
+    if !(s:dir->isdirectory())
+      execute '!git clone https://github.com/Shougo/dein.vim' s:dir
+    endif
+  endif
+  execute 'set runtimepath^='
+        \ .. s:dir->fnamemodify(':p')->substitute('[/\\]$', '', '')
+endif
 
 "dein Scripts-----------------------------
 
