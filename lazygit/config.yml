@@ -1,0 +1,30 @@
+gui:
+  mainPanelSplitMode: 'horizontal'
+  language: 'auto'
+  timeFormat: '02 Jan 06 15:04 JST' # https://pkg.go.dev/time#Time.Format
+  autoRefresh: true
+  theme:
+    lightTheme: true 
+    # colors: https://github.com/jesseduffield/lazygit/blob/04e474aa6610ca942a03b090ad4cdc29c646a049/pkg/theme/gocui.go
+    activeBorderColor:
+      - green
+    inactiveBorderColor:
+      - '#BBBBBB'
+    optionsTextColor:
+      - blue
+    selectedLineBgColor:
+      - reverse
+      - bold
+    selectedRangeBgColor:
+      - reverse
+    cherryPickedCommitBgColor:
+      - cyan
+    cherryPickedCommitFgColor:
+      - blue
+    unstagedChangesColor:
+      - red
+keybinding:
+  universal:
+    quit: '<c-q>'
+    prevBlock: '<c-p>'
+    nextBlock: '<c-n>'

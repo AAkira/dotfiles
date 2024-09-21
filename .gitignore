@@ -51,6 +51,9 @@
 ## My key map
 !/keyboard/jisplit89/
 
+## Lazygit
+!/lazygit
+
 # exclude files
 .DS_Store
 .netrwhist
