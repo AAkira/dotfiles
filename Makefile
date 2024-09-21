@@ -29,11 +29,7 @@ install-dev-tools:
 	make install-fvm
 
 .PHONY: install-zsh
-install-zsh:
-	# install zsh
-	brew install zsh
-	sudo sh -c "echo '/usr/local/bin/zsh' >> /etc/shells"
-	chsh -s /usr/local/bin/zsh
+install-oh-my-zsh:
 	# install oh-my-zsh
 	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 	# restore dotfile
@@ -45,20 +41,32 @@ install-zsh:
 	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
 	ln -s ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes
 	# zsh-autosuggestions 
-	sudo git clone https://github.com/zsh-users/zsh-autosuggestions $ZSH_CUSTOM/plugins/zsh-autosuggestions
+	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
 .PHONY: install-vim
 install-vim:
 	# install neo vim
-	brew install neovim/neovim/neovim
-	# install dein vim
-	curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh
-	sh ./installer.sh ~/.cache/dein
-	# pynvim 
-	# pip install pynvim
-	# nerd font
-	brew tap homebrew/cask-fonts
-	brew cask install font-hack-nerd-font
+	brew install neovim
+
+.PHONY: install-asdf
+install-asdf:
+	brew install asdf
+	asdf plugin-add python
+	asdf plugin add flutter
+	asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
+	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+	asdf plugin-add java https://github.com/halcyon/asdf-java.git
+
+.PHONY: install-yarn
+install-yarn:
+	# using asdf
+	corepack enable
+	asdf reshim nodejs
+
+.PHONY: install-qhq
+install-ghq:
+	brew install ghq
+	git config --global ghq.root '~/src'
 
 .PHONY: install-linter
 install-linter:
@@ -83,17 +91,6 @@ install-linter:
 install-java:
 	brew cask install java8
 
-.PHONY: install-dart
-install-dart:
-	brew tap dart-lang/dart
-	brew install dart
-	brew upgrade dart
-
-.PHONY: install-fvm
-install-fvm:
-	# flutter
-	pub global activate fvm
-
 .PHONY: install-go
 install-go:
 	brew install go
@@ -104,41 +101,10 @@ install-go:
 	go get github.com/golang/mock/gomock
 	go install github.com/golang/mock/mockgen
 
-.PHONY: install-pyenv
-install-pyenv:
-	brew install pyenv
-	brew install pyenv-virtualenv
-	# check list
-	# $ pyenv install --list
-	# $ pyenv install 3.7.3
-	# $ pyenv global 3.7.3
-	brew install pipenv
-
-.PHONY: install-rbenv
-install-rbenv:
-	brew install rbenv
-	brew install ruby-build
-	rbenv install $(rbenv install -l | grep -v - | tail -1)
-	rbenv global $(rbenv install -l | grep -v - | tail -1)
-
-.PHONY: install-node
-install-node:
-	brew install nodebrew
-	mkdir -p ~/.nodebrew/src
-	nodebrew install-binary stable
-	nodebrew use stable
-	# nodebrew ls-remote  // show version list
-	@echo check version list: nodebrew ls-remote
-	@echo install specified version: nodebrew install-binary [v8.11.4]
-
 .PHONY: install-ts
 install-ts:
 	npm install -g typescript
 	npm install -g ts-node
-
-.PHONY: install-yarn
-install-yarn:
-	brew install yarn
 
 .PHONY: install-kube
 install-kube:
@@ -192,23 +158,14 @@ update-xvim:
 
 .PHONY: install-tools
 install-tools:
-	# protobuf
-	go get -u google.golang.org/grpc
-	go get -u github.com/golang/protobuf/protoc-gen-go
-	brew install protobuf
-	# graphql
-	npm install -g apollo
 	# keynote highlight
 	brew install highlight
-	brew install luarocks
 	# peco
 	brew install peco
 	# jq
 	brew install jq
 	# tree
 	brew install tree
-	# webp
-	brew cask install WebPQuickLook
 	
 .PHONY: setup-default-extension
 setup-default-extension:
