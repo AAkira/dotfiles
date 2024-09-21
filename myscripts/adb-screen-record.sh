@@ -43,7 +43,7 @@ adb shell rm /sdcard/${FILE_NAME}.mp4
 echo "Converts to GIF? [y]"
 read convertGif
 case $convertGif in
-  	"y" | "Y") ffmpeg -i ${YOUR_PATH}/${FILE_NAME}.mp4 -filter_complex "[0:v] fps=10,scale=iw*1/2:ih*1/2,split [a][b];[a] palettegen [p];[b][p] paletteuse=dither=none" ${YOUR_PATH}/${FILE_NAME}.gif # creating gif 
+  	"y" | "Y") ffmpeg -i ${YOUR_PATH}/${FILE_NAME}.mp4 -filter_complex "[0:v] fps=10,scale=iw*1/2:ih*1/2,split [a][b];[a] palettegen [p];[b][p] paletteuse=dither=none" -loop 0 ${YOUR_PATH}/${FILE_NAME}.gif # creating gif 
 						;;
  	*) ;;
 esac
