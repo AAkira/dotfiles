@@ -15,7 +15,6 @@ set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jis
 
 "-------------------mac----------------------
 if has('mac')
-        set termencoding=utf-8
         set encoding=utf-8
         set fileencoding=utf-8
         set fileencodings=utf-8,cp932
@@ -131,8 +130,6 @@ noremap! <F10> <nop>
 noremap! <F11> <nop>
 noremap! <F12> <nop>
 noremap! <F13> <nop>
-" コピペずれないようにtoggle
-set pastetoggle=<C-z>
 " 自動挿入
 "inoremap { {}<LEFT>
 "inoremap [ []<LEFT>
@@ -244,6 +241,8 @@ endif
 "================================
 " stolarized theme
 " https://github.com/lifepillar/vim-solarized8
+"
+" ~/.config/nvim/colors/solarized8.vim
 "================================
 colorscheme solarized8
 
