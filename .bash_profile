@@ -1,5 +1,8 @@
 export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 
+# brew
+eval $(/opt/homebrew/bin/brew shellenv)
+
 # asdf
 . $(brew --prefix asdf)/libexec/asdf.sh
 
@@ -10,7 +13,8 @@ export PATH=$PATH:${ANDROID_HOME}/platform-tools
 export PATH=$PATH:${ANDROID_HOME}/tools
 
 # poetry
-export PATH="$HOME/.poetry/bin:$PATH"
+export PATH="$HOME/.poetry/bin:$PATH" # old
+export PATH="$HOME/.local/bin:$PATH" 
 
 # go
 export GOPATH="$HOME/go"
@@ -35,6 +39,8 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
   . "$HOME/google-cloud-sdk/completion.zsh.inc";
 fi
 
+# Antigravity
+export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
 
 export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/docker-compose-v1"
 export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/"
