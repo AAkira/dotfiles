@@ -1,0 +1,8 @@
+theme = "solarized-light" 
+mode = "auto"
+vcs = "git"
+watch = true
+line_numbers = true
+wrap_lines = false
+agent_notes = false
+
