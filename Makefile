@@ -28,16 +28,16 @@ install-dev-tools:
 	make install-dart
 	make install-fvm
 
-.PHONY: install-zsh
+.PHONY: install-oh-my-zsh
 install-oh-my-zsh:
 	# install oh-my-zsh
-	curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
 	# restore dotfile
-	cp ~/dotfiles/.zshrc ~/
+	# cp ~/dotfiles/.zshrc ~/
 	# install syntax highlight
-	sudo git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ~/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
+	brew install zsh-syntax-highlighting
 	# install completions
-	sudo git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
+	git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
 	ln -s ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes
 	# zsh-autosuggestions 
@@ -50,17 +50,18 @@ install-vim:
 
 .PHONY: install-vim-theme
 install-vim-theme:
-	cd ~/.config/nvim/colors
+	mkdir -p ~/.config/nvim/colors && cd ~/.config/nvim/colors
 	curl https://github.com/lifepillar/vim-solarized8/tree/master/colors/solarized8.vim -o solarized8.vim
 
 .PHONY: install-asdf
 install-asdf:
 	brew install asdf
-	asdf plugin-add python
+	asdf plugin add python
 	asdf plugin add flutter
 	asdf plugin add ruby https://github.com/asdf-vm/asdf-ruby.git
 	asdf plugin add nodejs https://github.com/asdf-vm/asdf-nodejs.git
-	asdf plugin-add java https://github.com/halcyon/asdf-java.git
+	asdf plugin add java https://github.com/halcyon/asdf-java.git
+	asdf plugin add awscli
 
 .PHONY: install-yarn
 install-yarn:
@@ -68,7 +69,7 @@ install-yarn:
 	corepack enable
 	asdf reshim nodejs
 
-.PHONY: install-qhq
+.PHONY: install-ghq
 install-ghq:
 	brew install ghq
 	git config --global ghq.root '~/src'
@@ -199,5 +200,5 @@ install-lazygit:
 
 .PHONY: install
 install:
-	cp -r ./ ~/ 
+	cp -r ./ ~/
 
