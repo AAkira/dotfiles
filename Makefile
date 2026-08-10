@@ -191,6 +191,12 @@ install-misc:
 	brew tap fumiyas/echo-sd
 	brew install echo-sd
 
+.PHONY: install-lazygit
+install-lazygit:
+	brew install lazygit git-delta
+	mkdir -p ~/Library/Application\ Support/lazygit
+	ln -sfn ~/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+
 .PHONY: install
 install:
 	cp -r ./ ~/ 

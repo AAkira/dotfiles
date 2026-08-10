@@ -1,6 +1,7 @@
 gui:
   mainPanelSplitMode: 'horizontal'
   language: 'auto'
+  useHunkModeInStagingView: false
   timeFormat: '02 Jan 06 15:04 JST' # https://pkg.go.dev/time#Time.Format
   autoRefresh: true
   theme:
@@ -23,6 +24,9 @@ gui:
       - blue
     unstagedChangesColor:
       - red
+git:
+  diffRenderers:
+    - command: delta --light --paging=never --line-numbers --width=variable --file-style=omit --hunk-header-style=omit
 keybinding:
   universal:
     quit: '<c-q>'
