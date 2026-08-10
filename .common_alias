@@ -25,7 +25,7 @@ alias vim='nvim'
 
 ## trash
 if type trash > /dev/null 2>&1; then
-  alias rm='trash -F'
+  alias rm='trash'
 fi
 
 # kubernetes
