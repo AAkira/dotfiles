@@ -5,7 +5,7 @@ gui:
   timeFormat: '02 Jan 06 15:04 JST' # https://pkg.go.dev/time#Time.Format
   autoRefresh: true
   theme:
-    lightTheme: true 
+    lightTheme: true
     # colors: https://github.com/jesseduffield/lazygit/blob/04e474aa6610ca942a03b090ad4cdc29c646a049/pkg/theme/gocui.go
     activeBorderColor:
       - green
@@ -32,3 +32,14 @@ keybinding:
     quit: '<c-q>'
     prevBlock: '<c-p>'
     nextBlock: '<c-n>'
+customCommands:
+  - key: "<c-g>"
+    context: "files"
+    description: 'generate commit message'
+    command: |
+      MSG=$(git diff --cached | claude --no-session-persistence --print --model haiku \
+        --system-prompt 'Output only a one-line git commit message in English. Begin with a capitalized base-form verb. End with a period. Output nothing except that single line.' \
+        'Here is the staged diff. Produce the commit message.')
+      git commit -e -m "$MSG"
+    loadingText: "Generating..."
+    output: terminal
