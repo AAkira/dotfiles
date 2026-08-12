@@ -39,7 +39,7 @@ install-oh-my-zsh:
 	# install completions
 	git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
 	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
-	ln -s ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes
+	make install-ohmyzsh-theme
 	# zsh-autosuggestions 
 	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
 
@@ -211,6 +211,10 @@ install-hunk:
 	# 実際に読まれるconfigを、このリポジトリの hunk/config.toml へのリンクにする
 	mkdir -p ~/.config/hunk
 	ln -sfn ~/hunk/config.toml ~/.config/hunk/config.toml
+
+.PHONY: install-ohmyzsh-theme
+install-ohmyzsh-theme:
+	ln -sfn ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes/aatheme.zsh-theme
 
 .PHONY: install
 install:
