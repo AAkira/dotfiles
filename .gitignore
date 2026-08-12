@@ -54,6 +54,14 @@
 ## Lazygit
 !/lazygit
 
+## herdr
+!/herdr/
+!/herdr/config.toml
+
+## hunk
+!/hunk/
+!/hunk/config.toml
+
 # exclude files
 .DS_Store
 .netrwhist
@@ -61,3 +69,6 @@
 *.pyc
 .swp
 .aa-conf # my token file
+
+.claude/settings.local.json
+
