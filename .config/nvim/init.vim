@@ -138,11 +138,11 @@ noremap! <F13> <nop>
 "inoremap ' ''<LEFT>
 "inoremap ` ``<LEFT>
 " mac clipboard copy
-vnoremap <silent><C-r> :!pbcopy;pbpaste<CR>
+vnoremap <silent><C-r> "+y
 " mac clipboard cut
-vnoremap <silent><C-x> :!pbcopy<CR>
+vnoremap <silent><C-x> "+d
 " mac clipboard paste
-nnoremap <silent><C-@> :r !pbpaste<CR>
+nnoremap <silent><C-@> "+p
 
 "================================
 " plugin keymap
