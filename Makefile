@@ -201,14 +201,12 @@ install-lazygit:
 .PHONY: install-herdr
 install-herdr:
 	brew install herdr
-	# 実際に読まれるconfigを、このリポジトリの herdr/config.toml へのリンクにする
 	mkdir -p ~/.config/herdr
 	ln -sfn ~/herdr/config.toml ~/.config/herdr/config.toml
 
 .PHONY: install-hunk
 install-hunk:
 	brew install hunk
-	# 実際に読まれるconfigを、このリポジトリの hunk/config.toml へのリンクにする
 	mkdir -p ~/.config/hunk
 	ln -sfn ~/hunk/config.toml ~/.config/hunk/config.toml
 
