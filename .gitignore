@@ -62,6 +62,9 @@
 !/hunk/
 !/hunk/config.toml
 
+## aerospace
+!/.aerospace.toml
+
 # exclude files
 .DS_Store
 .netrwhist
