@@ -56,7 +56,7 @@ automatically-unhide-macos-hidden-apps = false
 # even when they are invisible.
 # This config option is only available since 'config-version = 2'
 # Fallback value (if you omit the key): persistent-workspaces = []
-persistent-workspaces = ["U", "I", "O", "P", "@", "[", "semicolon", ":"]
+persistent-workspaces = ["U", "I", "O", "P", "@", "[", "semicolon", ":", "]", "quote", "backslash"]
 
 # A callback that runs every time binding mode changes
 # See: https://nikitabobko.github.io/AeroSpace/guide#binding-modes
@@ -166,9 +166,11 @@ gaps.outer.right =      0
     alt-y = 'workspace Y'
 #    alt-z = 'workspace Z'
     alt-semicolon = 'workspace semicolon'
-    alt-at = 'workspace @'
-    alt-kakko = 'workspace ['
-    alt-quote = 'workspace :'
+
+    alt-jisLeftSquareBracket = 'workspace ['
+    alt-jisAt = 'workspace @'
+    alt-jisColon = 'workspace :'
+    alt-jisRightSquareBracket = 'workspace ]'
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#move-node-to-workspace
     alt-shift-1 = 'move-node-to-workspace 1'
@@ -203,9 +205,11 @@ gaps.outer.right =      0
     alt-shift-y = 'move-node-to-workspace Y'
     alt-shift-z = 'move-node-to-workspace Z'
     alt-shift-semicolon = 'move-node-to-workspace semicolon'
-    alt-shift-at = 'move-node-to-workspace @'
-    alt-shift-kakko = 'move-node-to-workspace ['
-    alt-shift-quote = 'move-node-to-workspace :'
+    alt-shift-jisLeftSquareBracket = 'workspace ['
+    alt-shift-jisAt = 'workspace @'
+    alt-shift-jisColon = 'workspace :'
+    alt-shift-jisRightSquareBracket = 'workspace ]'
+
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
     # alt-tab = 'workspace-back-and-forth'
@@ -232,6 +236,10 @@ gaps.outer.right =      0
     alt-shift-l = ['join-with right', 'mode main']
 
 [[on-window-detected]]
+    if.app-id = 'us.zoom.xos'
+    run = 'move-node-to-workspace Y'
+
+[[on-window-detected]]
     if.app-id = 'com.tinyspeck.slackmacgap'
     run = 'move-node-to-workspace I'
 
@@ -248,7 +256,7 @@ gaps.outer.right =      0
     run = 'move-node-to-workspace @'
 
 [[on-window-detected]]
-    if.app-id = 'us.zoom.xos'
+    if.app-id = 'com.figma.Desktop'
     run = 'move-node-to-workspace ['
 
 [[on-window-detected]]
@@ -260,6 +268,10 @@ gaps.outer.right =      0
     run = 'layout floating'
 
 [[on-window-detected]]
+    if.app-id = 'com.apple.Preview'
+    run = 'layout floating'
+
+[[on-window-detected]]
     if.app-id = 'leits.MeetingBar'
     run = 'layout floating'
 
@@ -268,6 +280,8 @@ gaps.outer.right =      0
     run = 'layout floating'
 
 [key-mapping.key-notation-to-key-code]
-    at = 'leftSquareBracket'
-    kakko = 'rightSquareBracket'
+    jisLeftSquareBracket = 'rightSquareBracket'
+    jisAt = 'leftSquareBracket'
+    jisColon = 'quote'
+    jisRightSquareBracket = 'backslash'
 
