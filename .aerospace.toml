@@ -254,9 +254,17 @@ gaps.outer.right =      0
 [[on-window-detected]]
     if.app-id = 'com.google.Chrome'
     run = 'move-node-to-workspace semicolon'
+    
+[[on-window-detected]]
+    if.app-id = 'com.apple.finder'
+    run = 'layout floating'
 
 [[on-window-detected]]
     if.app-id = 'leits.MeetingBar'
+    run = 'layout floating'
+
+[[on-window-detected]]
+    if.app-id = 'com.apple.iCal'
     run = 'layout floating'
 
 [key-mapping.key-notation-to-key-code]
