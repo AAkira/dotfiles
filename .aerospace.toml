@@ -260,6 +260,10 @@ gaps.outer.right =      0
     run = 'move-node-to-workspace ['
 
 [[on-window-detected]]
+    if.app-id = 'com.spotify.client'
+    run = 'move-node-to-workspace ]'
+
+[[on-window-detected]]
     if.app-id = 'com.google.Chrome'
     run = 'move-node-to-workspace semicolon'
     
