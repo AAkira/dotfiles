@@ -205,10 +205,10 @@ gaps.outer.right =      0
     alt-shift-y = 'move-node-to-workspace Y'
     alt-shift-z = 'move-node-to-workspace Z'
     alt-shift-semicolon = 'move-node-to-workspace semicolon'
-    alt-shift-jisLeftSquareBracket = 'workspace ['
-    alt-shift-jisAt = 'workspace @'
-    alt-shift-jisColon = 'workspace :'
-    alt-shift-jisRightSquareBracket = 'workspace ]'
+    alt-shift-jisLeftSquareBracket = 'move-node-to-workspace ['
+    alt-shift-jisAt = 'move-node-to-workspace @'
+    alt-shift-jisColon = 'move-node-to-workspace :'
+    alt-shift-jisRightSquareBracket = 'move-node-to-workspace ]'
 
 
     # See: https://nikitabobko.github.io/AeroSpace/commands#workspace-back-and-forth
