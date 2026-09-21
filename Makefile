@@ -6,15 +6,44 @@ mac:
 
 .PHONY: init-mac
 init-mac:
-	# screen shot settings
-	defaults write com.apple.screencapture disable-shadow -boolean true
-	defaults write com.apple.screencapture type jpg
-	# key speed
+	# Keyboard settings
+	# Set fastest key repeat rate
 	defaults write -g KeyRepeat -int 2
-	defaults write -g InitialKeyRepeat -int 15
-	# finder
-	defaults write com.apple.finder _FXShowPosixPathInTitle -boolean true && killall Finder
-	defaults write com.apple.finder AppleShowAllFiles true && killall Finder off
+	# Reduce key repeat delay
+	defaults write -g InitialKeyRepeat -int 25
+	# Disable press-and-hold for keys in favor of key repeat
+	defaults write -g ApplePressAndHoldEnabled -bool false
+	# Use F1, F2, etc. keys as standard function keys
+	defaults write -g com.apple.keyboard.fnState -bool true
+	# Screenshot settings
+	# Disable shadow in screenshots
+	defaults write com.apple.screencapture disable-shadow -bool true
+	# Save screenshots as JPEG
+	defaults write com.apple.screencapture type jpg
+	# Finder settings
+	# Show hidden files by default
+	defaults write com.apple.finder AppleShowAllFiles -bool true
+	# Show all filename extensions
+	defaults write NSGlobalDomain AppleShowAllExtensions -bool true
+	# Display full POSIX path in Finder window title
+	defaults write com.apple.finder _FXShowPosixPathInTitle -bool true
+	# Show path bar
+	defaults write com.apple.finder ShowPathbar -bool true
+	# Show status bar
+	defaults write com.apple.finder ShowStatusBar -bool true
+	# Use list view in all Finder windows by default
+	defaults write com.apple.finder FXPreferredViewStyle -string "Nlsv"
+	# Dock settings
+	# Automatically hide and show the Dock
+	defaults write com.apple.dock autohide -bool true
+	# Do not show recent applications in Dock
+	defaults write com.apple.dock show-recents -bool false
+	# Do not rearrange Spaces based on most recent use (required for tiling WMs like AeroSpace)
+	defaults write com.apple.dock mru-spaces -bool false
+	# Restart affected applications
+	killall Finder 2>/dev/null || true
+	killall Dock 2>/dev/null || true
+	killall SystemUIServer 2>/dev/null || true
 
 .PHONY: install-dev-tools
 install-dev-tools:
@@ -50,8 +79,8 @@ install-vim:
 
 .PHONY: install-vim-theme
 install-vim-theme:
-	mkdir -p ~/.config/nvim/colors && cd ~/.config/nvim/colors
-	curl https://github.com/lifepillar/vim-solarized8/tree/master/colors/solarized8.vim -o solarized8.vim
+	mkdir -p ~/.config/nvim/colors
+	curl -fsSL https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8.vim -o ~/.config/nvim/colors/solarized8.vim
 
 .PHONY: install-asdf
 install-asdf:
