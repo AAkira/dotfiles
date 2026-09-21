@@ -1,0 +1,114 @@
+{
+    "profiles": [
+        {
+            "devices": [
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 323,
+                        "vendor_id": 1241
+                    },
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
+                            "from": { "key_code": "grave_accent_and_tilde" },
+                            "to": [{ "key_code": "escape" }]
+                        },
+                        {
+                            "from": { "key_code": "japanese_pc_nfer" },
+                            "to": [{ "key_code": "japanese_eisuu" }]
+                        },
+                        {
+                            "from": { "key_code": "japanese_pc_xfer" },
+                            "to": [{ "key_code": "f13" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_control" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "product_id": 285,
+                        "vendor_id": 2131
+                    },
+                    "manipulate_caps_lock_led": false,
+                    "simple_modifications": [
+                        {
+                            "from": { "key_code": "caps_lock" },
+                            "to": [{ "key_code": "left_control" }]
+                        },
+                        {
+                            "from": { "key_code": "international4" },
+                            "to": [{ "key_code": "f13" }]
+                        },
+                        {
+                            "from": { "key_code": "left_command" },
+                            "to": [{ "key_code": "left_option" }]
+                        },
+                        {
+                            "from": { "key_code": "left_control" },
+                            "to": [{ "key_code": "left_command" }]
+                        }
+                    ]
+                }
+            ],
+            "fn_function_keys": [
+                {
+                    "from": { "key_code": "f3" },
+                    "to": [{ "key_code": "mission_control" }]
+                },
+                {
+                    "from": { "key_code": "f4" },
+                    "to": [{ "key_code": "launchpad" }]
+                },
+                {
+                    "from": { "key_code": "f5" },
+                    "to": [{ "key_code": "illumination_decrement" }]
+                },
+                {
+                    "from": { "key_code": "f6" },
+                    "to": [{ "key_code": "illumination_increment" }]
+                },
+                {
+                    "from": { "key_code": "f9" },
+                    "to": [{ "consumer_key_code": "fastforward" }]
+                }
+            ],
+            "name": "Default profile",
+            "selected": true,
+            "simple_modifications": [
+                {
+                    "from": { "key_code": "f14" },
+                    "to": [{ "key_code": "left_command" }]
+                },
+                {
+                    "from": { "key_code": "grave_accent_and_tilde" },
+                    "to": [{ "key_code": "f13" }]
+                },
+                {
+                    "from": { "key_code": "japanese_kana" },
+                    "to": [{ "key_code": "f13" }]
+                },
+                {
+                    "from": { "key_code": "right_command" },
+                    "to": [{ "key_code": "left_option" }]
+                }
+            ],
+            "virtual_hid_keyboard": {
+                "country_code": 0,
+                "keyboard_type_v2": "jis"
+            }
+        }
+    ]
+}

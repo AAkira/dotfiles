@@ -29,9 +29,21 @@
 !/.gitconfig
 !/.gitmodules
 
+## config
+!/.config/
+/.config/*
+
+## Karabiner
+!/.config/karabiner/
+/.config/karabiner/*
+!/.config/karabiner/karabiner.json
+
 ## neo vim
 !/.config/nvim/
 !/.vim/rc/
+
+## aerospace
+!/.aerospace.toml
 
 ## IntelliJ
 !/.ideavimrc
@@ -62,8 +74,7 @@
 !/hunk/
 !/hunk/config.toml
 
-## aerospace
-!/.aerospace.toml
+
 
 # exclude files
 .DS_Store
