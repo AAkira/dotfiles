@@ -7,14 +7,16 @@ mac:
 .PHONY: init-mac
 init-mac:
 	# Keyboard settings
-	# Set fastest key repeat rate
-	defaults write -g KeyRepeat -int 2
-	# Reduce key repeat delay
-	defaults write -g InitialKeyRepeat -int 25
+	# Set fastest key repeat rate (1 is absolute fastest)
+	defaults write -g KeyRepeat -int 1
+	# Reduce key repeat delay (20 is optimal limit before fallback)
+	defaults write -g InitialKeyRepeat -int 20
 	# Disable press-and-hold for keys in favor of key repeat
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	# Use F1, F2, etc. keys as standard function keys
 	defaults write -g com.apple.keyboard.fnState -bool true
+	# Configure input source shortcuts
+	make init-shortcut
 	# Screenshot settings
 	# Disable shadow in screenshots
 	defaults write com.apple.screencapture disable-shadow -bool true
@@ -44,6 +46,10 @@ init-mac:
 	killall Finder 2>/dev/null || true
 	killall Dock 2>/dev/null || true
 	killall SystemUIServer 2>/dev/null || true
+
+.PHONY: init-shortcut
+init-shortcut:
+	@python3 ~/myscripts/set_shortcuts.py
 
 .PHONY: install-dev-tools
 install-dev-tools:
