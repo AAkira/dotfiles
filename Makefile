@@ -151,6 +151,7 @@ setup-mise:
 
 .PHONY: setup-ghq
 setup-ghq:
+	mkdir -p ~/src
 	git config --global ghq.root '~/src'
 
 .PHONY: setup-default-extension
