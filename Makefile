@@ -3,6 +3,9 @@ mac:
 	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 	brew update --force && brew upgrade
 	brew install rmtrash
+.PHONY: brew-bundle
+brew-bundle:
+	brew bundle
 
 .PHONY: init-mac
 init-mac:

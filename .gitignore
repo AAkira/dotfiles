@@ -6,6 +6,7 @@
 # specify not ignore file
 !/README.md
 !/MakeFile
+!/Brewfile
 !/myscripts/
 !/myprofile/
 
