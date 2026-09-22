@@ -42,6 +42,11 @@
 .config/nvim/colors/
 !/.vim/rc/
 
+## mise
+!/.config/mise/
+/.config/mise/*
+!/.config/mise/config.toml
+
 ## aerospace
 !/.aerospace.toml
 

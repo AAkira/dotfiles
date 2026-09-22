@@ -4,6 +4,10 @@ tap "nikitabobko/tap"
 
 # CLI Tools (Formulae)
 brew "mise"
+brew "openssl@3"
+brew "readline"
+brew "libyaml"
+brew "gmp"
 brew "neovim"
 brew "zsh-syntax-highlighting"
 brew "ghq"

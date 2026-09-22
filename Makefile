@@ -137,6 +137,10 @@ install-yarn:
 install-ghq:
 	brew install ghq
 	git config --global ghq.root '~/src'
+.PHONY: setup-mise
+setup-mise:
+	@which mise >/dev/null 2>&1 || brew install mise
+	mise install
 
 .PHONY: install-linter
 install-linter:
