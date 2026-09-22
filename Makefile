@@ -85,18 +85,27 @@ install-dev-tools:
 
 .PHONY: install-oh-my-zsh
 install-oh-my-zsh:
-	# install oh-my-zsh
-	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-	# restore dotfile
-	# cp ~/dotfiles/.zshrc ~/
-	# install syntax highlight
-	brew install zsh-syntax-highlighting
-	# install completions
-	git clone https://github.com/zsh-users/zsh-completions ~/.oh-my-zsh/custom/plugins/zsh-completions
-	# apply oy-my-zsh mytheme (aatheme.zsh-theme based on kphoen)
-	make install-ohmyzsh-theme
-	# zsh-autosuggestions 
-	git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+	@if [ ! -d "$$HOME/.oh-my-zsh/.git" ]; then \
+		echo "==> Installing Oh My Zsh..."; \
+		TMP_BACKUP=$$(mktemp -d); \
+		if [ -d "$$HOME/.oh-my-zsh/custom" ]; then cp -r "$$HOME/.oh-my-zsh/custom" "$$TMP_BACKUP/"; fi; \
+		if [ -d "$$HOME/.oh-my-zsh/themes" ]; then cp -r "$$HOME/.oh-my-zsh/themes" "$$TMP_BACKUP/"; fi; \
+		rm -rf "$$HOME/.oh-my-zsh"; \
+		git clone --depth=1 https://github.com/ohmyzsh/ohmyzsh.git "$$HOME/.oh-my-zsh"; \
+		if [ -d "$$TMP_BACKUP/custom" ]; then cp -rn "$$TMP_BACKUP/custom/." "$$HOME/.oh-my-zsh/custom/" 2>/dev/null || true; fi; \
+		if [ -d "$$TMP_BACKUP/themes" ]; then cp -rn "$$TMP_BACKUP/themes/." "$$HOME/.oh-my-zsh/themes/" 2>/dev/null || true; fi; \
+		rm -rf "$$TMP_BACKUP"; \
+		echo "==> Oh My Zsh installed successfully."; \
+	else \
+		echo "==> Oh My Zsh is already installed."; \
+	fi
+	@echo "==> Installing Oh My Zsh plugins..."; \
+	mkdir -p ~/.oh-my-zsh/custom/plugins
+	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ] || git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
+	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ] || git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git "$$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
+	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-completions" ] || git clone --depth=1 https://github.com/zsh-users/zsh-completions "$$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
+	@$(MAKE) install-ohmyzsh-theme
+	@echo "==> Oh My Zsh setup completed!" 
 
 .PHONY: install-vim
 install-vim:
@@ -264,10 +273,8 @@ install-hunk:
 	brew install hunk
 	mkdir -p ~/.config/hunk
 	ln -sfn ~/hunk/config.toml ~/.config/hunk/config.toml
-
-.PHONY: install-ohmyzsh-theme
-install-ohmyzsh-theme:
-	ln -sfn ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes/aatheme.zsh-theme
+	@$(MAKE) install-ohmyzsh-theme
+	@echo "==> Configuration links created successfully."
 
 .PHONY: install
 install:

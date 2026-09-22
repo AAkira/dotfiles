@@ -20,7 +20,6 @@
 
 ## zsh
 !/.zshrc
-!/.oh-my-zsh/
 
 ## vim
 !/.vimrc
@@ -28,7 +27,6 @@
 ## git
 !/.gitignore
 !/.gitconfig
-!/.gitmodules
 
 ## config
 !/.config/
