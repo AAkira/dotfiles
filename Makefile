@@ -17,6 +17,7 @@ help:
 	@echo "  setup-default-extension  Associate text/code file extensions with CotEditor"
 	@echo "  setup-ghq                Configure ghq root directory"
 	@echo "  install-vim-theme        Install Neovim solarized8 color scheme"
+	@echo "  setup-iterm-theme        Configure iTerm2 color theme (Solarized Light)"
 
 .PHONY: setup
 setup:
@@ -31,6 +32,7 @@ setup:
 	@$(MAKE) setup-ghq
 	@$(MAKE) setup-default-extension
 	@$(MAKE) install-vim-theme
+	@$(MAKE) setup-iterm-theme
 	@echo ""
 	@echo "=========================================="
 	@echo "  Setup completed!"
@@ -162,6 +164,10 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor md all
 	duti -s com.coteditor.CotEditor yml all
 
+
+.PHONY: setup-iterm-theme
+setup-iterm-theme:
+	@python3 ~/myscripts/set_iterm_solarized.py
 
 .PHONY: link-configs
 link-configs:
