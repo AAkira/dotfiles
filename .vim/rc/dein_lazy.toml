@@ -24,6 +24,9 @@ repo = 'ryanoasis/vim-devicons'
 repo = 'Shougo/deoplete.nvim'
 on_event = 'InsertCharPre'
 on_i = 1
+hook_post_update = '''
+  call dein#remote_plugins()
+'''
 hook_source = '''
   let g:deoplete#enable_at_startup = 1
   let g:deoplete#auto_complete_delay = 0

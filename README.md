@@ -15,6 +15,7 @@ make setup-mise               # Install mise and tools
 make link-configs             # Link tool configs (lazygit, herdr, hunk, etc.)
 make japanese-input           # Install & open settings for Google Japanese Input
 make setup-default-extension  # Set CotEditor as default editor for text files
+make setup-neovim             # Set up Neovim providers (pynvim, etc.), plugins, and theme
 make install-vim-theme        # Install Neovim solarized8 color scheme
 make setup-iterm-theme        # Configure iTerm2 color theme (Solarized Light)
 make help                     # Show available targets

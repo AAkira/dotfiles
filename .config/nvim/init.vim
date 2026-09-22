@@ -316,6 +316,9 @@ syntax enable
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
+  if has('nvim')
+    call dein#remote_plugins()
+  endif
 endif
 
 "End dein Scripts-------------------------

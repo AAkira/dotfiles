@@ -16,6 +16,7 @@ help:
 	@echo "  link-configs             Create symbolic links for config files (lazygit, herdr, hunk, etc.)"
 	@echo "  setup-default-extension  Associate text/code file extensions with CotEditor"
 	@echo "  setup-ghq                Configure ghq root directory"
+	@echo "  setup-neovim             Set up Neovim providers (pynvim, jedi), plugins, and theme"
 	@echo "  install-vim-theme        Install Neovim solarized8 color scheme"
 	@echo "  setup-iterm-theme        Configure iTerm2 color theme (Solarized Light)"
 
@@ -31,7 +32,7 @@ setup:
 	@$(MAKE) link-configs
 	@$(MAKE) setup-ghq
 	@$(MAKE) setup-default-extension
-	@$(MAKE) install-vim-theme
+	@$(MAKE) setup-neovim
 	@$(MAKE) setup-iterm-theme
 	@echo ""
 	@echo "=========================================="
@@ -165,7 +166,22 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor md all
 	duti -s com.coteditor.CotEditor yml all
 
-.PHONY: setup-vim-theme
+.PHONY: setup-neovim setup-vim
+setup-neovim setup-vim: install-vim-theme
+	@echo "==> Setting up Neovim providers and plugins..."
+	@if command -v mise >/dev/null 2>&1; then \
+		mise exec -- python3 -m pip install --upgrade pynvim jedi; \
+		mise exec -- gem install neovim 2>/dev/null || true; \
+	elif command -v python3 >/dev/null 2>&1; then \
+		python3 -m pip install --upgrade pynvim jedi; \
+	fi
+	@if command -v nvim >/dev/null 2>&1; then \
+		nvim --headless -c "if dein#check_install() | call dein#install() | endif" -c "call dein#remote_plugins()" -c "qa!" 2>/dev/null || true; \
+	fi
+	@echo "==> Neovim setup completed!"
+
+.PHONY: setup-vim-theme install-vim-theme
+setup-vim-theme: install-vim-theme
 install-vim-theme:
 	mkdir -p ~/.config/nvim/colors
 	curl -fsSL https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8.vim -o ~/.config/nvim/colors/solarized8.vim
