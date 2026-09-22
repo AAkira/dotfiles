@@ -164,6 +164,10 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor md all
 	duti -s com.coteditor.CotEditor yml all
 
+.PHONY: setup-vim-theme
+install-vim-theme:
+	mkdir -p ~/.config/nvim/colors
+	curl -fsSL https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8.vim -o ~/.config/nvim/colors/solarized8.vim
 
 .PHONY: setup-iterm-theme
 setup-iterm-theme:
