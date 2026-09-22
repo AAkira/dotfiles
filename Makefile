@@ -54,6 +54,23 @@ init-mac:
 init-shortcut:
 	@python3 ~/myscripts/set_shortcuts.py
 
+.PHONY: japanese-input
+japanese-input:
+	@if [ ! -d "/Library/Input Methods/GoogleJapaneseInput.app" ]; then \
+		echo "Installing Google Japanese IME via Homebrew..."; \
+		brew install --cask google-japanese-ime; \
+	else \
+		echo "Google Japanese IME is already installed."; \
+	fi
+	@echo "Opening Keyboard Settings..."
+	@open "x-apple.systempreferences:com.apple.Keyboard-Settings.extension" || true
+	@echo ""
+	@echo "============================================================"
+	@echo "【Google日本語入力の設定手順】"
+	@echo "1. 開いた「キーボード」設定の「入力ソース」>「編集...」をクリック"
+	@echo "2. 左下の「+」ボタンから「日本語」>「ひらがな (Google)」を追加"
+	@echo "============================================================"
+
 .PHONY: install-dev-tools
 install-dev-tools:
 	sudo easy_install pip
