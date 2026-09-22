@@ -3,31 +3,33 @@ export PATH=/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin
 # brew
 eval $(/opt/homebrew/bin/brew shellenv)
 
-# asdf
-. $(brew --prefix asdf)/libexec/asdf.sh
+# mise
+if command -v mise >/dev/null 2>&1; then
+  if [ -n "$ZSH_VERSION" ]; then
+    eval "$(mise activate zsh)"
+  else
+    eval "$(mise activate bash)"
+  fi
+fi
+
+# local bin & tools (Antigravity CLI, etc.)
+export PATH="$HOME/.local/bin:$PATH"
 
 # android
-export ANDROID_HOME=~/Library/Android/sdk
-export PATH=$PATH:${ANDROID_HOME}
-export PATH=$PATH:${ANDROID_HOME}/platform-tools
-export PATH=$PATH:${ANDROID_HOME}/tools
-
-# poetry
-export PATH="$HOME/.poetry/bin:$PATH" # old
-export PATH="$HOME/.local/bin:$PATH" 
+export ANDROID_HOME="$HOME/Library/Android/sdk"
+export PATH="$PATH:$ANDROID_HOME:$ANDROID_HOME/platform-tools:$ANDROID_HOME/tools"
 
 # go
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
 
-# flutter (fvm)
-export PATH="$PATH":"$HOME/.pub-cache/bin"
-
 # myscript
-export PATH=$PATH:$HOME/myscripts
+export PATH="$PATH:$HOME/myscripts"
 
 # read my tokens
-source ~/.aa-conf
+if [ -f "$HOME/.aa-conf" ]; then
+  source "$HOME/.aa-conf"
+fi
 
 # The next line updates PATH for the Google Cloud SDK.
 if [ -f "$HOME/google-cloud-sdk/path.zsh.inc" ]; then
@@ -39,13 +41,7 @@ if [ -f "$HOME/google-cloud-sdk/completion.zsh.inc" ]; then
   . "$HOME/google-cloud-sdk/completion.zsh.inc";
 fi
 
-# Antigravity
-export PATH="$HOME/.antigravity/antigravity/bin:$PATH"
-
-export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/docker-compose-v1"
-export PATH="$PATH":"/Applications/Docker.app/Contents/Resources/bin/"
-
-# for asdf ruby on m1 mac
-RUBY_CONFIGURE_OPTS='--build aarch64-apple-darwin20.6'
-RUBY_CFLAGS=-DUSE_FFI_CLOSURE_ALLOC
+# Docker
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin/docker-compose-v1"
+export PATH="$PATH:/Applications/Docker.app/Contents/Resources/bin"
 
