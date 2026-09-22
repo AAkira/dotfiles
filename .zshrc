@@ -198,7 +198,11 @@ bindkey '^]' peco-src
 
 # kube-context for prompt
 function _kube-current-context () {
-  KUBE_PS1_CONTEXT=$(kubectl config current-context)
+  if (( $+commands[kubectl] )); then
+    KUBE_PS1_CONTEXT=$(kubectl config current-context 2>/dev/null)
+  else
+    KUBE_PS1_CONTEXT=""
+  fi
 }
 
 autoload -Uz add-zsh-hook
