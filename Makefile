@@ -1,7 +1,48 @@
+.DEFAULT_GOAL := help
+
+.PHONY: help
+help:
+	@echo "Usage: make [target]"
+	@echo ""
+	@echo "Targets:"
+	@echo "  setup                    Run complete initialization setup"
+	@echo "  mac                      Install Homebrew, update, and run brew bundle"
+	@echo "  brew-bundle              Install packages defined in Brewfile"
+	@echo "  init-mac                 Apply macOS defaults (Finder, Dock, keyboard, etc.)"
+	@echo "  init-shortcut            Configure keyboard & Mission Control shortcuts"
+	@echo "  japanese-input           Install & configure Google Japanese IME"
+	@echo "  install-oh-my-zsh        Install Oh My Zsh, plugins, and custom theme"
+	@echo "  setup-mise               Install mise and run mise install"
+	@echo "  link-configs             Create symbolic links for config files (lazygit, herdr, hunk, etc.)"
+	@echo "  setup-default-extension  Associate text/code file extensions with CotEditor"
+	@echo "  setup-ghq                Configure ghq root directory"
+	@echo "  install-vim-theme        Install Neovim solarized8 color scheme"
+
+.PHONY: setup
+setup:
+	@echo "=========================================="
+	@echo "  Starting dotfiles initial setup"
+	@echo "=========================================="
+	@$(MAKE) mac
+	@$(MAKE) init-mac
+	@$(MAKE) install-oh-my-zsh
+	@$(MAKE) setup-mise
+	@$(MAKE) link-configs
+	@$(MAKE) setup-ghq
+	@$(MAKE) setup-default-extension
+	@$(MAKE) install-vim-theme
+	@echo ""
+	@echo "=========================================="
+	@echo "  Setup completed!"
+	@echo "  Run 'make japanese-input' if you need Google Japanese IME."
+	@echo "=========================================="
+
 .PHONY: mac
 mac:
-	/usr/bin/ruby -e "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+	@which brew >/dev/null 2>&1 || /bin/bash -c "$$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 	brew update --force && brew upgrade
+	brew bundle
+
 .PHONY: brew-bundle
 brew-bundle:
 	brew bundle
@@ -17,8 +58,8 @@ init-mac:
 	defaults write -g ApplePressAndHoldEnabled -bool false
 	# Use F1, F2, etc. keys as standard function keys
 	defaults write -g com.apple.keyboard.fnState -bool true
-	# Configure input source shortcuts
-	make init-shortcut
+	# Configure input source & Mission Control shortcuts
+	@$(MAKE) init-shortcut
 	# Screenshot settings
 	# Disable shadow in screenshots
 	defaults write com.apple.screencapture disable-shadow -bool true
@@ -86,19 +127,20 @@ install-oh-my-zsh:
 	else \
 		echo "==> Oh My Zsh is already installed."; \
 	fi
+	@echo "==> Installing Oh My Zsh plugins..."
+	@mkdir -p ~/.oh-my-zsh/custom/plugins
 	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions" ] || git clone --depth=1 https://github.com/zsh-users/zsh-autosuggestions "$$HOME/.oh-my-zsh/custom/plugins/zsh-autosuggestions"
 	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting" ] || git clone --depth=1 https://github.com/zsh-users/zsh-syntax-highlighting.git "$$HOME/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting"
 	@[ -d "$$HOME/.oh-my-zsh/custom/plugins/zsh-completions" ] || git clone --depth=1 https://github.com/zsh-users/zsh-completions "$$HOME/.oh-my-zsh/custom/plugins/zsh-completions"
 	@$(MAKE) install-ohmyzsh-theme
-	@echo "==> Oh My Zsh setup completed!" 
+	@echo "==> Oh My Zsh setup completed!"
 
-
-.PHONY: install-vim-theme
-install-vim-theme:
-	mkdir -p ~/.config/nvim/colors
-	curl -fsSL https://raw.githubusercontent.com/lifepillar/vim-solarized8/master/colors/solarized8.vim -o ~/.config/nvim/colors/solarized8.vim
-
-
+.PHONY: install-ohmyzsh-theme
+install-ohmyzsh-theme:
+	@mkdir -p ~/.oh-my-zsh/custom/themes
+	@mkdir -p ~/.oh-my-zsh/themes
+	ln -sfn ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/custom/themes/aatheme.zsh-theme
+	ln -sfn ~/git-misc/ohmyzsh-theme/aatheme.zsh-theme ~/.oh-my-zsh/themes/aatheme.zsh-theme
 
 .PHONY: setup-mise
 setup-mise:
@@ -106,6 +148,8 @@ setup-mise:
 	mise install
 
 .PHONY: setup-ghq
+setup-ghq:
+	git config --global ghq.root '~/src'
 
 .PHONY: setup-default-extension
 setup-default-extension:
@@ -119,8 +163,14 @@ setup-default-extension:
 	duti -s com.coteditor.CotEditor yml all
 
 
+.PHONY: link-configs
+link-configs:
+	@echo "==> Linking tool configurations..."
+	@mkdir -p ~/Library/Application\ Support/lazygit
 	ln -sfn ~/lazygit/config.yml ~/Library/Application\ Support/lazygit/config.yml
+	@mkdir -p ~/.config/herdr
 	ln -sfn ~/herdr/config.toml ~/.config/herdr/config.toml
+	@mkdir -p ~/.config/hunk
 	ln -sfn ~/hunk/config.toml ~/.config/hunk/config.toml
 	@$(MAKE) install-ohmyzsh-theme
 	@echo "==> Configuration links created successfully."
