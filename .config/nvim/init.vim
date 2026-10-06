@@ -243,3 +243,13 @@ endif
 
 "End dein Scripts-------------------------
 
+
+"================================
+" LSP
+"================================
+lua << LUA
+vim.lsp.config('*', {
+  capabilities = require('ddc_source_lsp').make_client_capabilities(),
+})
+vim.lsp.enable({ 'dartls' })
+LUA

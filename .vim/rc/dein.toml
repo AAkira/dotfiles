@@ -26,7 +26,7 @@ hook_add = '''
   set completeopt=menuone,noselect
   call ddc#custom#patch_global(#{
     \ ui: 'native',
-    \ sources: ['file', 'around'],
+    \ sources: ['lsp', 'file', 'around'],
     \ sourceOptions: #{
     \   _: #{
     \     matchers: ['matcher_head'],
@@ -34,6 +34,11 @@ hook_add = '''
     \     minAutoCompleteLength: 1,
     \   },
     \   around: #{ mark: 'A' },
+    \   lsp: #{
+    \     mark: 'L',
+    \     isVolatile: v:true,
+    \     forceCompletionPattern: '\.\w*',
+    \   },
     \   file: #{
     \     mark: 'F',
     \     isVolatile: v:true,
@@ -42,6 +47,7 @@ hook_add = '''
     \ },
     \ sourceParams: #{
     \   file: #{ mode: 'posix' },
+    \   lsp: #{ enableResolveItem: v:true },
     \ },
     \ })
   call ddc#enable()
@@ -61,3 +67,9 @@ repo = 'Shougo/ddc-filter-matcher_head'
 
 [[plugins]]
 repo = 'Shougo/ddc-filter-sorter_rank'
+
+[[plugins]]
+repo = 'Shougo/ddc-source-lsp'
+
+[[plugins]]
+repo = 'neovim/nvim-lspconfig'
