@@ -14,3 +14,50 @@ hook_add = '''
   \ }
 '''
 
+
+# ========== Auto completion ==========
+[[plugins]]
+repo = 'vim-denops/denops.vim'
+
+[[plugins]]
+repo = 'Shougo/ddc.vim'
+depends = ['denops.vim']
+hook_add = '''
+  set completeopt=menuone,noselect
+  call ddc#custom#patch_global(#{
+    \ ui: 'native',
+    \ sources: ['file', 'around'],
+    \ sourceOptions: #{
+    \   _: #{
+    \     matchers: ['matcher_head'],
+    \     sorters: ['sorter_rank'],
+    \     minAutoCompleteLength: 1,
+    \   },
+    \   around: #{ mark: 'A' },
+    \   file: #{
+    \     mark: 'F',
+    \     isVolatile: v:true,
+    \     forceCompletionPattern: '\S/\S*',
+    \   },
+    \ },
+    \ sourceParams: #{
+    \   file: #{ mode: 'posix' },
+    \ },
+    \ })
+  call ddc#enable()
+'''
+
+[[plugins]]
+repo = 'Shougo/ddc-ui-native'
+
+[[plugins]]
+repo = 'Shougo/ddc-source-around'
+
+[[plugins]]
+repo = 'LumaKernel/ddc-source-file'
+
+[[plugins]]
+repo = 'Shougo/ddc-filter-matcher_head'
+
+[[plugins]]
+repo = 'Shougo/ddc-filter-sorter_rank'

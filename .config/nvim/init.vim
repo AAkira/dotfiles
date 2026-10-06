@@ -1,66 +1,23 @@
 "#######################
-" Path
-"#######################
-let g:python_host_prog = system('echo -n $(which python2)')
-let g:python3_host_prog = system('echo -n $(which python3)')
-let g:ruby_host_prog = system('echo -n $(which ruby)')
-
-"#######################
 " Encording
 "#######################
-set fenc=utf-8
-set encoding=utf-8
 set fileencoding=utf-8
-set fileencodings=utf-8,cp932,ucs-bom,iso-2022-jp-3,iso-2022-jp,eucjp-ms,euc-jisx0213,euc-jp,sjis
-
-"-------------------mac----------------------
-if has('mac')
-        set encoding=utf-8
-        set fileencoding=utf-8
-        set fileencodings=utf-8,cp932
-endif
-
-"------------文字コードの自動認識-----------
-if &encoding !=# 'utf-8'
-        set encoding=japan
-        set fileencoding=japan
-endif
-
-"#######################
-" File format
-"#######################
-"================================
-" .mdがmarkdownではなくmodula2として認識されるので…
-"================================
-augroup PrevimSettings
-autocmd!
-autocmd BufNewFile,BufRead *.{md,mdwn,mkd,mkdn,mark*} set filetype=markdown
-augroup END
+set fileencodings=utf-8,cp932
 
 "#######################
 " Display
 "#######################
 set number "行番号表示
-set showmode "モード表示
 set title "編集中のファイル名を表示
-set ruler "ルーラーの表示
-set showcmd "入力中のコマンドをステータスに表示する
 set showmatch "括弧入力時の対応する括弧を表示
-set laststatus=2 "ステータスラインを常に表示
 set expandtab "tab -> space
 set tabstop=2
 set shiftwidth=2
-set autoindent
 set smartindent
 
 "#######################
 " Programing
 "#######################
-syntax on "カラー表示
-set smartindent "オートインデント
-" tab関連
-"set expandtab "タブの代わりに空白文字挿入
-"set ts=4 sw=4 sts=0 "タブは半角4文字分のスペース
 " ファイルを開いた際に、前回終了時の行で起動
 autocmd BufReadPost * if line("'\"") > 0 && line("'\"") <= line("$") | exe "normal g`\"" | endif
 
@@ -82,10 +39,7 @@ set inccommand=split "Show diff preview
 "#######################
 " Others
 "#######################
-set backspace=indent,eol,start "空白文字, 前の行の改行, 文字以外も削除可
 set whichwrap=b,s,<,>,[,]       "左右のカーソル移動で行間移動可能
-" file type detect
-filetype detect
 
 "#######################
 " Keymap
@@ -130,13 +84,6 @@ noremap! <F10> <nop>
 noremap! <F11> <nop>
 noremap! <F12> <nop>
 noremap! <F13> <nop>
-" 自動挿入
-"inoremap { {}<LEFT>
-"inoremap [ []<LEFT>
-"inoremap ( ()<LEFT>
-"inoremap " ""<LEFT>
-"inoremap ' ''<LEFT>
-"inoremap ` ``<LEFT>
 " mac clipboard copy
 vnoremap <silent><C-r> "+y
 " mac clipboard cut
@@ -269,31 +216,11 @@ endif
 
 "dein Scripts-----------------------------
 
-if &compatible
-  set nocompatible               " Be iMproved
-endif
-
 let s:dein_dir = expand('~/.cache/dein') " dein directory
-let s:dein_repo_dir = s:dein_dir . '/repos/github.com/Shougo/dein.vim'
-
-" Required:
-execute 'set runtimepath^=' . s:dein_repo_dir
 
 " Required:
 if dein#load_state(s:dein_dir)
   call dein#begin(s:dein_dir)
-
-  " Let dein manage dein
-  " Required:
-  call dein#add(s:dein_repo_dir)
-
-  " Load plugins from toml file
-  " Add or remove your plugins here:
-"  call dein#add('Shougo/neosnippet.vim')
-"  call dein#add('Shougo/neosnippet-snippets')
-
-  " You can specify revision/branch/tag.
-"  call dein#add('Shougo/deol.nvim', { 'rev': '01203d4c9' })
 
   " Plugin files
   let g:rc_dir    = expand('~/.vim/rc')
@@ -309,16 +236,9 @@ if dein#load_state(s:dein_dir)
   call dein#save_state()
 endif
 
-" Required:
-filetype plugin indent on
-syntax enable
-
 " If you want to install not installed plugins on startup.
 if dein#check_install()
   call dein#install()
-  if has('nvim')
-    call dein#remote_plugins()
-  endif
 endif
 
 "End dein Scripts-------------------------

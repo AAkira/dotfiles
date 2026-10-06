@@ -7,7 +7,7 @@ repo = 'scrooloose/nerdtree'
 hook_add = '''
   nnoremap <silent><C-e> :NERDTreeToggle %<CR>
   "Launch NERDTree if there aren't arguments
-  autocmd vimenter * if !argc() | NERDTree | endif
+  autocmd vimenter * if !argc() | execute 'NERDTree' | endif
 
   "Close NERDTree when files close
   autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -19,26 +19,7 @@ hook_add = '''
 repo = 'ryanoasis/vim-devicons'
 # should install this font: font-hack-nerd-font
 
-# ========== Auto completion ==========
-[[plugins]]
-repo = 'Shougo/deoplete.nvim'
-on_event = 'InsertCharPre'
-on_i = 1
-hook_post_update = '''
-  call dein#remote_plugins()
-'''
-hook_source = '''
-  let g:deoplete#enable_at_startup = 1
-  let g:deoplete#auto_complete_delay = 0
-  let g:deoplete#auto_complete_start_length = 1
-  let g:deoplete#enable_camel_case = 0
-  let g:deoplete#enable_ignore_case = 0
-  let g:deoplete#enable_refresh_always = 0
-  let g:deoplete#enable_smart_case = 1
-  let g:deoplete#file#enable_buffer_path = 1
-  let g:deoplete#max_list = 10000
-'''
-
+# ========== Snippet ==========
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
 
@@ -55,19 +36,6 @@ hook_source = '''
     set conceallevel=2 concealcursor=niv
   endif
 '''
-
-[[plugins]]
-repo = 'wokalski/autocomplete-flow'
-depends = ['deoplete.nvim']
-on_i = 1
-hook_source = '''
-  let g:autocomplete_flow#insert_paren_after_function = 0
-'''
-
-[[plugins]]
-repo = 'deoplete-plugins/deoplete-jedi'
-depends = ['deoplete.nvim']
-on_i = 1
 
 # ========== Linter, Formatter ==========
 
@@ -153,6 +121,6 @@ repo = 'tpope/vim-commentary'
 on_i = 1
 
 # ----- add and remove pairs -----
-# [[plugins]]
-# repo = 'jiangmiao/auto-pairs'
-# on_i = 1
+[[plugins]]
+repo = 'jiangmiao/auto-pairs'
+lazy = 0
